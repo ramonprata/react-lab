@@ -3,6 +3,8 @@ import { SideMenu } from '../../navigation/';
 import Header from './header';
 import { useWidthResize } from '../../../trials/customHooks';
 import { dimenssions } from '../../../shared/screenDimensions';
+import { BoxContent } from '../../../shared/components';
+import { defaultTheme } from '../../../shared/theme';
 
 /**
  * TODO: set props type flow js
@@ -24,7 +26,7 @@ const MainPage = (props) => {
 
         <Header isMobile={isMobile} />
 
-        <div style={content}>
+        <BoxContent pl={16} style={content}>
           <div style={{ height: 100 }}>content</div>
           <div style={{ height: 100 }}>content</div>
           <div style={{ height: 100 }}>content</div>
@@ -38,13 +40,16 @@ const MainPage = (props) => {
           <div style={{ height: 100 }}>content</div>
           <div style={{ height: 100 }}>content</div>
           <div style={{ height: 100 }}>content</div>
-        </div>
+        </BoxContent>
       </div>
     </div>
   );
 };
 
 const getStyles = (isMobile = false) => {
+  const { layout } = defaultTheme;
+  const widthMenuOpend = `${layout.menuOpend}px`;
+  const widthMenuClosed = `${layout.menuClosed}px`;
   return {
     gridContainer: {
       margin: 0,
@@ -55,7 +60,7 @@ const getStyles = (isMobile = false) => {
     },
     gridFour: {
       display: 'grid',
-      gridTemplateColumns: `${isMobile ? '64px' : '200px'} auto`,
+      gridTemplateColumns: `${isMobile ? widthMenuClosed : widthMenuOpend} auto`,
       gridTemplateRows: '64px auto',
       height: '100%',
     },

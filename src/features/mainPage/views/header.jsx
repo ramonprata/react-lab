@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../../logo.svg';
 import { Grid, Typography } from '@material-ui/core';
-
+import { BoxContent } from '../../../shared/components';
 /**
  * TODO: set props type flow js
  * type Props = {
@@ -13,9 +13,11 @@ const Header = (props) => {
   const { isMobile } = props;
   return (
     <Grid container direction="column" justify="center" style={{ backgroundColor: 'yellow' }}>
-      <Typography variant="h5" color="primary">
-        Page title
-      </Typography>
+      <BoxContent pl={16}>
+        <Typography variant="h5" color="primary">
+          Page title
+        </Typography>
+      </BoxContent>
     </Grid>
   );
 };

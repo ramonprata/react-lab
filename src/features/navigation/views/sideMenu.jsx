@@ -26,15 +26,11 @@ const SideMenu = (props) => {
   };
 
   return (
-    <Grid container direction="column" spacing={1}>
-      <Grid item>
-        <MenuHeader />
-      </Grid>
-      <Grid item>
-        <List component="nav" aria-label="main mailbox folders">
-          {renderMenuOptions()}
-        </List>
-      </Grid>
+    <Grid container direction="column">
+      <MenuHeader isMobile={isMobile} />
+      <List component="nav" aria-label="main mailbox folders">
+        {renderMenuOptions()}
+      </List>
     </Grid>
   );
 };
