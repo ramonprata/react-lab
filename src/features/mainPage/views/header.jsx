@@ -13,10 +13,13 @@ const Header = (props) => {
   const { isMobile } = props;
   return (
     <Grid container direction="column" justify="center" style={{ backgroundColor: 'yellow' }}>
-      <BoxContent pl={16}>
-        <Typography variant="h5" color="primary">
-          Page title
-        </Typography>
+      <BoxContent>
+        <Grid container direction="row" alignItems="center">
+          <img src={logo} className="app-logo" alt="logo" />
+          <Typography variant="h5" color="primary">
+            Page title
+          </Typography>
+        </Grid>
       </BoxContent>
     </Grid>
   );

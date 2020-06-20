@@ -1,8 +1,8 @@
 import React from 'react';
 import { Typography, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import logo from '../../../logo.svg';
 import { defaultTheme } from '../../../shared/theme';
+import { BoxContent } from '../../../shared/components';
 
 /**
  * TODO: set props type flow js
@@ -14,27 +14,20 @@ import { defaultTheme } from '../../../shared/theme';
 const MenuHeader = (props) => {
   const { isMobile } = props;
   return (
-    <Grid
-      container
-      direction="column"
-      justify="center"
-      alignItems="center"
-      style={styles.headerContainer}
-    >
-      <Grid container direction="row" alignItems="center">
-        <img src={logo} className="app-logo" alt="logo" />
+    <Grid container direction="column" justify="center" style={styles.headerContainer}>
+      <BoxContent pl={16}>
         {!isMobile && (
           <Typography variant="h5" color="primary">
             React lab
           </Typography>
         )}
-      </Grid>
+      </BoxContent>
     </Grid>
   );
 };
 const styles = {
   headerContainer: {
-    height: defaultTheme.layout.headerHeight,
+    minHeight: defaultTheme.layout.headerHeight,
     backgroundColor: 'tomato',
   },
 };
