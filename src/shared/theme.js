@@ -233,7 +233,7 @@ export const defaultTheme = {
   layout: {
     headerHeight: 64,
     menuClosed: 64,
-    menuOpend: 200,
+    menuOpened: 240,
   },
 };
 

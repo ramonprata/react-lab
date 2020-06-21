@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Grid } from '@material-ui/core';
+import { Typography, Grid, Icon, IconButton, Fade } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { defaultTheme } from '../../../shared/theme';
 import { BoxContent } from '../../../shared/components';
@@ -7,20 +7,30 @@ import { BoxContent } from '../../../shared/components';
 /**
  * TODO: set props type flow js
  * type Props = {
-    isMobile: boolean
+    isMobile: boolean,
+    menuIsOpened: boolean
   };
  */
 
 const MenuHeader = (props) => {
-  const { isMobile } = props;
+  const { menuIsOpened, toggleMenu, showContent } = props;
+  const padding = menuIsOpened ? 16 : 0;
+  const justify = menuIsOpened ? 'space-between' : 'center';
   return (
     <Grid container direction="column" justify="center" style={styles.headerContainer}>
-      <BoxContent pl={16}>
-        {!isMobile && (
-          <Typography variant="h5" color="primary">
-            React lab
-          </Typography>
-        )}
+      <BoxContent pl={padding} pr={padding}>
+        <Grid container direction="row" alignItems="center" justify={justify}>
+          {menuIsOpened && showContent && (
+            <Typography variant="h5" color="primary">
+              <Fade in={showContent} timeout={200}>
+                <div>React lab</div>
+              </Fade>
+            </Typography>
+          )}
+          <IconButton onClick={toggleMenu} disableRipple={true}>
+            <Icon color="primary">{menuIsOpened ? 'close' : 'menu_open'}</Icon>
+          </IconButton>
+        </Grid>
       </BoxContent>
     </Grid>
   );

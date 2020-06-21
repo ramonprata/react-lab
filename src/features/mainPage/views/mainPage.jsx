@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SideMenu } from '../../navigation/';
 import Header from './header';
-import { useWidthResize } from '../../../trials/customHooks';
-import { dimenssions } from '../../../shared/screenDimensions';
 import { BoxContent } from '../../../shared/components';
-import { defaultTheme } from '../../../shared/theme';
 
 /**
  * TODO: set props type flow js
@@ -14,7 +11,7 @@ import { defaultTheme } from '../../../shared/theme';
  */
 
 const MainPage = (props) => {
-  const { isMobile } = useWidthResize(dimenssions.smartphone);
+  const { isMobile } = props;
   const { gridContainer, gridFour, menu, content, header, colorFour } = getStyles(isMobile);
 
   return (
@@ -47,9 +44,6 @@ const MainPage = (props) => {
 };
 
 const getStyles = (isMobile = false) => {
-  const { layout } = defaultTheme;
-  const widthMenuOpend = `${layout.menuOpend}px`;
-  const widthMenuClosed = `${layout.menuClosed}px`;
   return {
     gridContainer: {
       margin: 0,
@@ -60,7 +54,7 @@ const getStyles = (isMobile = false) => {
     },
     gridFour: {
       display: 'grid',
-      gridTemplateColumns: `${isMobile ? widthMenuClosed : widthMenuOpend} auto`,
+      gridTemplateColumns: `auto 1fr`,
       gridTemplateRows: '64px auto',
       height: '100%',
     },
