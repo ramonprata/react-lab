@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import List from '@material-ui/core/List';
 import MenuOption from './menuOption';
 import menu from '../menu.json';
-import { Grid } from '@material-ui/core';
+import { Grid, Drawer, Divider, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import MenuHeader from './menuHeader';
 import { defaultTheme } from '../../../shared/theme';
 import Collapse from '@material-ui/core/Collapse';
@@ -18,10 +19,9 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
  */
 
 const SideMenu = (props) => {
-  const { isMobile } = props;
-  const [menuIsOpened, toggleMenu] = useState(true);
+  const { isMobile, menuIsOpened, toggleMenu } = props;
   const [showContent, setShowContent] = useState(true);
-  const { menuContainer } = useStyles(menuIsOpened);
+  const { menuContainer, list, paperDrawer } = useStyles(menuIsOpened, isMobile)();
 
   useEffect(() => {
     setTimeout(() => {
@@ -40,30 +40,73 @@ const SideMenu = (props) => {
     ));
   };
 
-  return (
-    <ClickAwayListener onClickAway={() => toggleMenu(false)}>
-      <Grid container direction="column" style={menuContainer}>
+  const renderMenuContent = () => {
+    return (
+      <Grid container direction="column" className={menuContainer}>
         <MenuHeader
           isMobile={isMobile}
           menuIsOpened={menuIsOpened}
           toggleMenu={() => toggleMenu(!menuIsOpened)}
           showContent={showContent}
         />
-        <List component="nav" aria-label="main mailbox folders">
+        <Divider variant="fullWidth" />
+        <List
+          component="nav"
+          classes={{
+            root: list,
+          }}
+        >
           {renderMenuOptions()}
         </List>
       </Grid>
-    </ClickAwayListener>
+    );
+  };
+
+  return (
+    <React.Fragment>
+      {isMobile ? (
+        <Drawer
+          PaperProps={{
+            classes: {
+              root: paperDrawer,
+            },
+          }}
+          elevation={0}
+          onClose={toggleMenu}
+          open={menuIsOpened}
+          anchor="left"
+        >
+          {renderMenuContent()}
+        </Drawer>
+      ) : (
+        <Paper square elevation={0}>
+          {renderMenuContent()}
+        </Paper>
+      )}
+    </React.Fragment>
   );
 };
 
-const useStyles = (menuIsOpened = true) => {
-  const { layout } = defaultTheme;
-  return {
-    menuContainer: {
-      width: menuIsOpened ? layout.menuOpened : layout.menuClosed,
-      transition: 'all .2s linear',
-    },
-  };
-};
+const useStyles = (menuIsOpened = true, isMobile = false) =>
+  makeStyles(() => {
+    const { layout } = defaultTheme;
+    const width = menuIsOpened ? layout.menuOpened : layout.menuClosed;
+    return {
+      paperDrawer: {
+        overflow: 'hidden',
+      },
+      menuContainer: {
+        width,
+        transition: 'all .2s linear',
+      },
+      list: {
+        width,
+        height: window.innerHeight - layout.headerHeight,
+        overflowY: 'hidden',
+        '&:hover': {
+          overflowY: 'hidden',
+        },
+      },
+    };
+  });
 export default SideMenu;

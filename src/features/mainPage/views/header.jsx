@@ -1,7 +1,15 @@
 import React from 'react';
-import logo from '../../../logo.svg';
-import { Grid, Typography } from '@material-ui/core';
-import { BoxContent } from '../../../shared/components';
+
+import {
+  Grid,
+  Typography,
+  Icon,
+  IconButton,
+  Paper,
+  Switch,
+  FormControlLabel,
+} from '@material-ui/core';
+import { BoxContent, Logo } from '../../../shared/components';
 /**
  * TODO: set props type flow js
  * type Props = {
@@ -10,18 +18,38 @@ import { BoxContent } from '../../../shared/components';
  */
 
 const Header = (props) => {
-  const { isMobile } = props;
+  const { isMobile, menuIsOpened, toggleMenu, prefersDarkMode, setPrefersDarkMode } = props;
   return (
-    <Grid container direction="column" justify="center" style={{ backgroundColor: 'yellow' }}>
-      <BoxContent>
-        <Grid container direction="row" alignItems="center">
-          <img src={logo} className="app-logo" alt="logo" />
-          <Typography variant="h5" color="primary">
-            Page title
-          </Typography>
+    <Paper square elevation={3}>
+      <Grid container direction="row" alignItems="center" style={{ height: '100%' }}>
+        <Grid container direction="row" alignItems="center" item md={9} xs={8}>
+          {isMobile && (
+            <IconButton onClick={toggleMenu}>
+              <Icon>menu</Icon>
+            </IconButton>
+          )}
+          <Logo />
+          <Typography variant="h5">Page title</Typography>
         </Grid>
-      </BoxContent>
-    </Grid>
+        <Grid container direction="row" justify="flex-end" item md={3} xs={4}>
+          <BoxContent pr={16}>
+            <FormControlLabel
+              labelPlacement="start"
+              control={
+                <Switch
+                  checked={prefersDarkMode}
+                  onChange={setPrefersDarkMode}
+                  name="checkedA"
+                  // color="primary"
+                  inputProps={{ 'aria-label': 'secondary checkbox' }}
+                />
+              }
+              label="Dark mode"
+            />
+          </BoxContent>
+        </Grid>
+      </Grid>
+    </Paper>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SideMenu } from '../../navigation/';
 import Header from './header';
 import { BoxContent } from '../../../shared/components';
+import { defaultTheme } from '../../../shared/theme';
 
 /**
  * TODO: set props type flow js
@@ -11,19 +12,28 @@ import { BoxContent } from '../../../shared/components';
  */
 
 const MainPage = (props) => {
-  const { isMobile } = props;
-  const { gridContainer, gridFour, menu, content, header, colorFour } = getStyles(isMobile);
+  const { isMobile, prefersDarkMode, setPrefersDarkMode } = props;
+  const [menuIsOpened, toggleMenu] = useState(true);
+  const { gridContainer, gridContent, menu, content } = getStyles(isMobile);
+
+  const onToggleMenu = () => {
+    toggleMenu(!menuIsOpened);
+  };
 
   return (
     <div style={gridContainer}>
-      <div style={gridFour}>
+      <div style={gridContent}>
         <div style={menu}>
-          <SideMenu isMobile={isMobile} />
+          <SideMenu isMobile={isMobile} menuIsOpened={menuIsOpened} toggleMenu={onToggleMenu} />
         </div>
-
-        <Header isMobile={isMobile} />
-
-        <BoxContent pl={16} style={content}>
+        <Header
+          prefersDarkMode={prefersDarkMode}
+          setPrefersDarkMode={setPrefersDarkMode}
+          isMobile={isMobile}
+          menuIsOpened={menuIsOpened}
+          toggleMenu={onToggleMenu}
+        />
+        <BoxContent pd={16} style={content}>
           <div style={{ height: 100 }}>content</div>
           <div style={{ height: 100 }}>content</div>
           <div style={{ height: 100 }}>content</div>
@@ -52,21 +62,20 @@ const getStyles = (isMobile = false) => {
       height: '100vh',
       width: '100%',
     },
-    gridFour: {
+    gridContent: {
       display: 'grid',
       gridTemplateColumns: `auto 1fr`,
       gridTemplateRows: '64px auto',
       height: '100%',
     },
-
-    menu: { backgroundColor: 'orange', gridRow: '1/3' },
-
+    menu: {
+      gridRow: '1/3',
+    },
     content: {
       backgroundColor: 'violet',
       overflowY: 'auto',
-      height: window.innerHeight - 64,
+      height: window.innerHeight - defaultTheme.layout.headerHeight,
     },
-    colorFour: { backgroundColor: 'aqua' },
   };
 };
 
