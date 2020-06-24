@@ -1,12 +1,12 @@
 [
   {
     "id": 0,
-    "label": "menu opt. one",
-    "icon": "drafts"
+    "label": "Components",
+    "icon": "inbox"
   },
   {
     "id": 1,
-    "label": "menu opt. tow",
+    "label": "State Management",
     "icon": "inbox"
   }
 ]

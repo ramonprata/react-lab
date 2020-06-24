@@ -43,21 +43,23 @@ const SideMenu = (props) => {
   const renderMenuContent = () => {
     return (
       <Grid container direction="column" className={menuContainer}>
-        <MenuHeader
-          isMobile={isMobile}
-          menuIsOpened={menuIsOpened}
-          toggleMenu={() => toggleMenu(!menuIsOpened)}
-          showContent={showContent}
-        />
-        <Divider variant="fullWidth" />
-        <List
-          component="nav"
-          classes={{
-            root: list,
-          }}
-        >
-          {renderMenuOptions()}
-        </List>
+        <Paper square variant="outlined">
+          <MenuHeader
+            isMobile={isMobile}
+            menuIsOpened={menuIsOpened}
+            toggleMenu={() => toggleMenu(!menuIsOpened)}
+            showContent={showContent}
+          />
+          {/* <Divider variant="fullWidth" /> */}
+          <List
+            component="nav"
+            classes={{
+              root: list,
+            }}
+          >
+            {renderMenuOptions()}
+          </List>
+        </Paper>
       </Grid>
     );
   };

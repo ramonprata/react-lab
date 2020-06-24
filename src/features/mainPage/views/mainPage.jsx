@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { SideMenu } from '../../navigation/';
 import Header from './header';
-import { BoxContent } from '../../../shared/components';
+import { BoxContent, Logo } from '../../../shared/components';
 import { defaultTheme } from '../../../shared/theme';
+import { Grid } from '@material-ui/core';
 
 /**
  * TODO: set props type flow js
@@ -34,19 +35,9 @@ const MainPage = (props) => {
           toggleMenu={onToggleMenu}
         />
         <BoxContent pd={16} style={content}>
-          <div style={{ height: 100 }}>content</div>
-          <div style={{ height: 100 }}>content</div>
-          <div style={{ height: 100 }}>content</div>
-          <div style={{ height: 100 }}>content</div>
-          <div style={{ height: 100 }}>content</div>
-          <div style={{ height: 100 }}>content</div>
-          <div style={{ height: 100 }}>content</div>
-          <div style={{ height: 100 }}>content</div>
-          <div style={{ height: 100 }}>content</div>
-          <div style={{ height: 100 }}>content</div>
-          <div style={{ height: 100 }}>content</div>
-          <div style={{ height: 100 }}>content</div>
-          <div style={{ height: 100 }}>content</div>
+          <Grid container direction="row" justify="center" alignItems="center" style={{ flex: 1 }}>
+            <Logo height={300} />
+          </Grid>
         </BoxContent>
       </div>
     </div>
@@ -72,7 +63,7 @@ const getStyles = (isMobile = false) => {
       gridRow: '1/3',
     },
     content: {
-      backgroundColor: 'violet',
+      // backgroundColor: 'violet',
       overflowY: 'auto',
       height: window.innerHeight - defaultTheme.layout.headerHeight,
     },
