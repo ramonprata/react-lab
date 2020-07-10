@@ -18,10 +18,15 @@ import { BoxContent, Logo } from '../../../shared/components';
  */
 
 const Header = (props) => {
-  const { isMobile, menuIsOpened, toggleMenu, prefersDarkMode, setPrefersDarkMode } = props;
+  const { isMobile, toggleMenu, prefersDarkMode, setPrefersDarkMode } = props;
   return (
-    <Paper square variant="outlined">
-      <Grid container direction="row" alignItems="center" style={{ height: '100%' }}>
+    <Paper square elevation={0}>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        style={{ height: '100%', borderBottom: 'solid 1px #e0e0e0' }}
+      >
         <Grid container direction="row" alignItems="center" item md={9} xs={8}>
           {isMobile && (
             <IconButton onClick={toggleMenu}>
@@ -40,7 +45,7 @@ const Header = (props) => {
                   checked={prefersDarkMode}
                   onChange={setPrefersDarkMode}
                   name="checkedA"
-                  // color="primary"
+                  color="primary"
                   inputProps={{ 'aria-label': 'secondary checkbox' }}
                 />
               }

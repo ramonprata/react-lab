@@ -3,6 +3,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
+import { useHistory } from 'react-router-dom';
 
 /**
  * TODO: set props type flow js
@@ -13,9 +14,15 @@ import Icon from '@material-ui/core/Icon';
  */
 
 const MenuOption = (props) => {
-  const { label, icon, onClick } = props;
+  const { label, icon, uri } = props;
+  const history = useHistory();
+
+  const goTo = () => {
+    history.push(uri);
+  };
+
   return (
-    <ListItem button>
+    <ListItem button onClick={goTo}>
       <ListItemIcon>
         <Icon>{icon}</Icon>
       </ListItemIcon>

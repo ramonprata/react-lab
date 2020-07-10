@@ -1,6 +1,5 @@
 import React from 'react';
-import { Typography, Grid, Icon, IconButton, Fade } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography, Grid, Icon, IconButton } from '@material-ui/core';
 import { defaultTheme } from '../../../shared/theme';
 import { BoxContent, Logo } from '../../../shared/components';
 
@@ -21,11 +20,7 @@ const MenuHeader = (props) => {
       <BoxContent pl={padding}>
         <Grid container direction="row" alignItems="center" justify={justify}>
           {isMobile && <Logo />}
-          {menuIsOpened && showContent && (
-            <Fade in={showContent}>
-              <Typography variant="h5">React lab</Typography>
-            </Fade>
-          )}
+          {menuIsOpened && showContent && <Typography variant="h5">React lab</Typography>}
           <IconButton onClick={toggleMenu} disableRipple={true}>
             <Icon>{menuIsOpened ? 'close' : 'menu_open'}</Icon>
           </IconButton>
@@ -38,7 +33,7 @@ const MenuHeader = (props) => {
 const styles = {
   headerContainer: {
     minHeight: defaultTheme.layout.headerHeight,
-    // backgroundColor: 'tomato',
+    borderBottom: 'solid 1px #e0e0e0',
   },
 };
 

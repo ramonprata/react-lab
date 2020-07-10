@@ -1,12 +1,20 @@
 [
   {
     "id": 0,
-    "label": "Components",
-    "icon": "inbox"
+    "label": "Home",
+    "icon": "home",
+    "uri": "/"
   },
   {
     "id": 1,
+    "label": "Components",
+    "icon": "inbox",
+    "uri": "/components"
+  },
+  {
+    "id": 2,
     "label": "State Management",
-    "icon": "inbox"
+    "icon": "inbox",
+    "uri": "/state-management"
   }
 ]
