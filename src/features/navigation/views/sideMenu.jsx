@@ -19,7 +19,10 @@ import { useEffect } from 'react';
 const SideMenu = (props) => {
   const { isMobile, menuIsOpened, toggleMenu } = props;
   const [showContent, setShowContent] = useState(true);
-  const { menuContainer, list, paperDrawer, elevation1 } = useStyles(menuIsOpened, isMobile)();
+  const { menuContainer, list, paperDrawer, elevation1 } = useStyles(
+    menuIsOpened,
+    isMobile
+  )();
 
   useEffect(() => {
     setTimeout(() => {

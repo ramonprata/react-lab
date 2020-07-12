@@ -16,11 +16,18 @@ const MenuHeader = (props) => {
   const padding = menuIsOpened && !isMobile ? 16 : 0;
   const justify = menuIsOpened ? 'space-between' : 'center';
   return (
-    <Grid container direction="column" justify="center" style={styles.headerContainer}>
+    <Grid
+      container
+      direction="column"
+      justify="center"
+      style={styles.headerContainer}
+    >
       <BoxContent pl={padding}>
         <Grid container direction="row" alignItems="center" justify={justify}>
           {isMobile && <Logo />}
-          {menuIsOpened && showContent && <Typography variant="h5">React lab</Typography>}
+          {menuIsOpened && showContent && (
+            <Typography variant="h5">React lab</Typography>
+          )}
           <IconButton onClick={toggleMenu} disableRipple={true}>
             <Icon>{menuIsOpened ? 'close' : 'menu_open'}</Icon>
           </IconButton>

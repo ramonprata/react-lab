@@ -10,10 +10,14 @@ import { Switch, Route } from 'react-router-dom';
 // import StateMagementPage from '../../stateManagement/views/StateMagementPage';
 
 const HomePage = lazy(() => import('../../homePage/views/HomePage'));
-const ComponentsDemoPage = lazy(() => import('../../componentsDemo/views/ComponentsDemoPage'));
-const StateMagementPage = lazy(() => import('../../stateManagement/views/StateMagementPage'));
+const ComponentsDemoPage = lazy(() =>
+  import('../../componentsDemo/views/ComponentsDemoPage')
+);
+const StateMagementPage = lazy(() =>
+  import('../../stateManagement/views/StateMagementPage')
+);
 
-const MainPageContainer = () => {
+const MainPageContainer = (props) => {
   const [prefersDarkMode, setPrefersDarkMode] = useState(false);
   const { isMobile } = useWidthResize(dimenssions.smartphone);
 

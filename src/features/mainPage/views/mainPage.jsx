@@ -25,7 +25,11 @@ const MainPage = (props) => {
     <div className={gridContainer}>
       <div className={gridContent}>
         <div className={menu}>
-          <SideMenu isMobile={isMobile} menuIsOpened={menuIsOpened} toggleMenu={onToggleMenu} />
+          <SideMenu
+            isMobile={isMobile}
+            menuIsOpened={menuIsOpened}
+            toggleMenu={onToggleMenu}
+          />
         </div>
         <Header
           prefersDarkMode={prefersDarkMode}

@@ -1,0 +1,25 @@
+{
+  "Component with material UI": {
+    "prefix": "ccm",
+    "body": [
+      "import React from 'react';",
+      "import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';",
+      "",
+      "const MyComponent = (props: MyComponentProps) => {",
+      "\tconst {} = props;",
+      "\tconst classes = useStyles(props)();",
+      "\tconst {} = classes;",
+      "",
+      "\treturn <div>MyComponent</div>;",
+      "};",
+      "",
+      "type MyComponentProps = {};",
+      "",
+      "MyComponent.defaultProps = {};",
+      "",
+      "const useStyles = (props: MyComponentProps) => createStyles({});",
+      "export default MyComponent;"
+    ],
+    "description": "Create a new componente with material Ui customization"
+  }
+}
