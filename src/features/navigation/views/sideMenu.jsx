@@ -5,7 +5,7 @@ import menu from '../menu.json';
 import { Grid, Drawer, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuHeader from './menuHeader';
-import { defaultTheme, theme } from '../../../shared/theme';
+import { defaultTheme } from '../../../shared/theme';
 import { useEffect } from 'react';
 
 /**
@@ -19,7 +19,7 @@ import { useEffect } from 'react';
 const SideMenu = (props) => {
   const { isMobile, menuIsOpened, toggleMenu } = props;
   const [showContent, setShowContent] = useState(true);
-  const { menuContainer, list, paperDrawer, elevation1 } = useStyles(
+  const { menuContainer, list, paperDrawer } = useStyles(
     menuIsOpened,
     isMobile
   )();
@@ -93,9 +93,6 @@ const useStyles = (menuIsOpened = true, isMobile = false) =>
     return {
       paperDrawer: {
         overflow: 'hidden',
-      },
-      elevation1: {
-        boxShadow: 'none',
       },
       menuContainer: {
         width,

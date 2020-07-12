@@ -5,10 +5,6 @@ import { dimenssions } from '../../../shared/screenDimensions';
 import MainPage from './mainPage';
 import { Switch, Route } from 'react-router-dom';
 
-// import HomePage from '../../homePage/views/HomePage';
-// import ComponentsDemoPage from '../../componentsDemo/views/ComponentsDemoPage';
-// import StateMagementPage from '../../stateManagement/views/StateMagementPage';
-
 const HomePage = lazy(() => import('../../homePage/views/HomePage'));
 const ComponentsDemoPage = lazy(() =>
   import('../../componentsDemo/views/ComponentsDemoPage')
@@ -31,27 +27,6 @@ const MainPageContainer = (props) => {
     [prefersDarkMode]
   );
 
-  const renderWithSuspense = () => {
-    return (
-      <Suspense fallback={<div>Loading...</div>}>
-        <Switch>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/components" exact component={ComponentsDemoPage} />
-          <Route path="/state-management" exact component={StateMagementPage} />
-        </Switch>
-      </Suspense>
-    );
-  };
-
-  const renderWithOutSuspense = () => {
-    return (
-      <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/components" exact component={ComponentsDemoPage} />
-        <Route path="/state-management" exact component={StateMagementPage} />
-      </Switch>
-    );
-  };
   return (
     <ThemeProvider theme={theme}>
       <MainPage
@@ -59,8 +34,17 @@ const MainPageContainer = (props) => {
         setPrefersDarkMode={() => setPrefersDarkMode(!prefersDarkMode)}
         isMobile={isMobile}
       >
-        {renderWithSuspense()}
-        {/* {renderWithOutSuspense()} */}
+        <Suspense fallback={<div>Loading...</div>}>
+          <Switch>
+            <Route path="/" exact component={HomePage} />
+            <Route path="/components" exact component={ComponentsDemoPage} />
+            <Route
+              path="/state-management"
+              exact
+              component={StateMagementPage}
+            />
+          </Switch>
+        </Suspense>
       </MainPage>
     </ThemeProvider>
   );
