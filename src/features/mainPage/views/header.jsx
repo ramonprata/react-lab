@@ -20,7 +20,7 @@ import { BoxContent, Logo } from '../../../shared/components';
 const Header = (props) => {
   const { isMobile, toggleMenu, prefersDarkMode, setPrefersDarkMode } = props;
   return (
-    <Paper square elevation={0}>
+    <Paper square elevation={0} style={{ height: '100%' }}>
       <Grid
         container
         direction="row"

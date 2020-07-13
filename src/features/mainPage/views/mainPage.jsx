@@ -4,6 +4,7 @@ import Header from './header';
 import { defaultTheme } from '../../../shared/theme';
 import { Grid, Paper } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { CssGridContainer, CssGridItem } from '../../../shared/components';
 
 /**
  * TODO: set props type flow js
@@ -20,40 +21,34 @@ const MainPage = (props) => {
   const onToggleMenu = () => {
     toggleMenu(!menuIsOpened);
   };
-
   return (
-    <div className={gridContainer}>
-      <div className={gridContent}>
-        <div className={menu}>
+    <Paper square elevation={0} className={gridContainer}>
+      <CssGridContainer
+        templateCol={`${menuIsOpened ? 240 : 64} auto`}
+        templateRow="64px auto"
+        repeatCol={false}
+      >
+        <CssGridItem gridRow="1/3" gridContainer="1/2">
           <SideMenu
             isMobile={isMobile}
             menuIsOpened={menuIsOpened}
             toggleMenu={onToggleMenu}
           />
-        </div>
-        <Header
-          prefersDarkMode={prefersDarkMode}
-          setPrefersDarkMode={setPrefersDarkMode}
-          isMobile={isMobile}
-          menuIsOpened={menuIsOpened}
-          toggleMenu={onToggleMenu}
-        />
-        <Paper square elevation={0}>
-          <Grid
-            container
-            item
-            lg={12}
-            md={12}
-            sm={12}
-            xs={12}
-            direction="column"
-            className={content}
-          >
-            {props.children}
-          </Grid>
-        </Paper>
-      </div>
-    </div>
+        </CssGridItem>
+        <CssGridItem>
+          <Header
+            prefersDarkMode={prefersDarkMode}
+            setPrefersDarkMode={setPrefersDarkMode}
+            isMobile={isMobile}
+            menuIsOpened={menuIsOpened}
+            toggleMenu={onToggleMenu}
+          />
+        </CssGridItem>
+        <CssGridItem>
+          <Paper>{props.children}</Paper>
+        </CssGridItem>
+      </CssGridContainer>
+    </Paper>
   );
 };
 

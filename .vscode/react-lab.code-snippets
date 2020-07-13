@@ -17,7 +17,9 @@
       "",
       "MyComponent.defaultProps = {};",
       "",
-      "const useStyles = (props: MyComponentProps) => createStyles({});",
+      "const useStyles = (props: MyComponentProps) =>",
+      "\tmakeStyles((theme) => createStyles({}));",
+      "",
       "export default MyComponent;"
     ],
     "description": "Create a new componente with material Ui customization"

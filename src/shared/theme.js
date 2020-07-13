@@ -239,6 +239,6 @@ export const defaultTheme = {
 
 export const theme = createMuiTheme({
   palette: {
-    type: 'light',
+    type: 'dark',
   },
 });
