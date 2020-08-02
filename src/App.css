@@ -8,6 +8,7 @@ body {
   color: white;
   width: 100vw;
   height: 100vh;
+  /* font-family: 'Comic Sans MS'; */
 }
 /* width */
 ::-webkit-scrollbar {

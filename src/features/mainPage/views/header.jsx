@@ -34,7 +34,7 @@ const Header = (props) => {
             </IconButton>
           )}
           <Logo />
-          <Typography variant="h5">Page title</Typography>
+          <Typography variant="h5">Rect lab</Typography>
         </Grid>
         <Grid container direction="row" justify="flex-end" item md={3} xs={4}>
           <BoxContent pr={16}>

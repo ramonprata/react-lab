@@ -4,6 +4,7 @@ import { useWidthResize } from '../../../trials/customHooks';
 import { dimenssions } from '../../../shared/screenDimensions';
 import MainPage from './mainPage';
 import { Switch, Route } from 'react-router-dom';
+import { theme as defaultTheme } from '../../../shared/theme';
 
 const HomePage = lazy(() => import('../../homePage/views/HomePage'));
 const ComponentsDemoPage = lazy(() =>
@@ -20,6 +21,7 @@ const MainPageContainer = (props) => {
   const theme = React.useMemo(
     () =>
       createMuiTheme({
+        ...defaultTheme,
         palette: {
           type: prefersDarkMode ? 'dark' : 'light',
         },
