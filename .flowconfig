@@ -14,6 +14,6 @@
 [lints]
 
 [options]
-all=true
+
 
 [strict]

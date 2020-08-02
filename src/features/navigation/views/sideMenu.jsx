@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import List from '@material-ui/core/List';
-import MenuOption from './menuOption';
+import MenuOption, { OptionItem, Option } from './menuOption';
 import menu from '../menu.json';
-import { Grid, Drawer, Paper } from '@material-ui/core';
+import { Grid, Drawer, Paper, Collapse } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuHeader from './menuHeader';
 import { defaultTheme } from '../../../shared/theme';
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 /**
  * TODO: set props type flow js
@@ -17,8 +18,11 @@ import { useEffect } from 'react';
  */
 
 const SideMenu = (props) => {
+  const history = useHistory();
   const { isMobile, menuIsOpened, toggleMenu } = props;
   const [showContent, setShowContent] = useState(true);
+  const [selectedOption, setSelectedOption] = useState('0');
+
   const { menuContainer, list, paperDrawer } = useStyles(
     menuIsOpened,
     isMobile
@@ -30,15 +34,49 @@ const SideMenu = (props) => {
     }, 250);
   }, [menuIsOpened]);
 
+  const goTo = (uri: string) => {
+    history.push(uri);
+  };
+
+  const onClickMenuOption = (option: Option) => {
+    if (option.subMenu) {
+      if (selectedOption === option.id) {
+        setSelectedOption(null);
+      } else {
+        setSelectedOption(option.id);
+      }
+    }
+    goTo(option.uri);
+  };
+
   const renderMenuOptions = () => {
-    return menu.map((menuOption) => (
-      <MenuOption
-        key={`menuOption-${menuOption.id}`}
-        label={showContent && menuIsOpened ? menuOption.label : ''}
-        icon={menuOption.icon}
-        uri={menuOption.uri}
-        onClick={() => {}}
-      />
+    return menu.map((menuOption: Option) => (
+      <React.Fragment>
+        <MenuOption
+          key={`menuOption-${menuOption.id}`}
+          label={showContent && menuIsOpened ? menuOption.label : ''}
+          icon={menuOption.icon}
+          onClick={() => onClickMenuOption(menuOption)}
+        />
+        <Collapse
+          in={selectedOption === menuOption.id}
+          timeout="auto"
+          unmountOnExit
+        >
+          <List component="div" disablePadding>
+            {menuOption.subMenu &&
+              menuOption.subMenu.map((subOption: OptionItem) => (
+                <MenuOption
+                  key={`menuOption-${subOption.id}`}
+                  label={showContent && menuIsOpened ? subOption.label : ''}
+                  icon={subOption.icon}
+                  onClick={() => onClickMenuOption(subOption)}
+                  isSubOption
+                />
+              ))}
+          </List>
+        </Collapse>
+      </React.Fragment>
     ));
   };
 

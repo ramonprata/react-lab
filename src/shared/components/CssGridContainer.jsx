@@ -61,7 +61,7 @@ CssGridContainer.defaultProps = {
 };
 
 const useStyles = (props) =>
-  makeStyles((theme) => {
+  makeStyles((theme: Theme) => {
     const {
       templateCol,
       templateRow,

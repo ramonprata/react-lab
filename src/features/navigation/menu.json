@@ -1,20 +1,34 @@
 [
   {
-    "id": 0,
+    "id": "0",
     "label": "Home",
     "icon": "home",
     "uri": "/"
   },
   {
-    "id": 1,
+    "id": "1",
     "label": "Components",
-    "icon": "inbox",
+    "icon": "extension",
     "uri": "/components"
   },
   {
-    "id": 2,
+    "id": "2",
+    "label": "CSS tricks",
+    "icon": "insights",
+    "uri": "/csstricks",
+    "subMenu": [
+      {
+        "id": "2.1",
+        "label": "Css grid",
+        "icon": "grid_on",
+        "uri": "#cssgrid"
+      }
+    ]
+  },
+  {
+    "id": "3",
     "label": "State Management",
-    "icon": "inbox",
+    "icon": "device_hub",
     "uri": "/state-management"
   }
 ]

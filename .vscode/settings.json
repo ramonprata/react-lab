@@ -5,5 +5,7 @@
     "editor.formatOnSave": false
   },
   "eslint.autoFixOnSave": true,
-  "prettier.disableLanguages": ["js"]
+  "prettier.disableLanguages": ["js"],
+  "typescript.validate.enable": false,
+  "javascript.validate.enable": true
 }

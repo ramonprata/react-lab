@@ -1,6 +1,6 @@
 import React, { useState, Suspense, lazy } from 'react';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { useWidthResize } from '../../../trials/customHooks';
+import { useWidthResize } from '../../../shared/hooks';
 import { dimenssions } from '../../../shared/screenDimensions';
 import MainPage from './mainPage';
 import { Switch, Route } from 'react-router-dom';

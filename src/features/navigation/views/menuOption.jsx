@@ -1,10 +1,10 @@
+//@flow
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
-import { useHistory } from 'react-router-dom';
 
 /**
  * TODO: set props type flow js
@@ -15,29 +15,41 @@ import { useHistory } from 'react-router-dom';
  */
 
 const MenuOption = (props) => {
-  const { label, icon, uri } = props;
-  const history = useHistory();
-  const { listItemContainer } = useStyles()();
-
-  const goTo = () => {
-    history.push(uri);
-  };
+  const { label, icon, onClick, isSubOption } = props;
+  const { listItemContainer } = useStyles(isSubOption)();
 
   return (
-    <ListItem button onClick={goTo} className={listItemContainer}>
+    <ListItem button onClick={onClick} className={listItemContainer}>
       <ListItemIcon>
         <Icon>{icon}</Icon>
       </ListItemIcon>
-      <ListItemText primary={label} />
+      <ListItemText
+        primary={!isSubOption && label}
+        secondary={isSubOption && label}
+        secondaryTypographyProps={{ color: 'primary' }}
+      />
     </ListItem>
   );
 };
 
-const useStyles = () =>
+export type OptionItem = {
+  id: string,
+  label: string,
+  icon: string,
+  isSubOption?: boolean,
+};
+
+export type Option = {
+  ...OptionItem,
+  subMenu: Array<OptionItem>,
+};
+
+const useStyles = (isSubOption = false) =>
   makeStyles((theme) =>
     createStyles({
       listItemContainer: {
-        height: 56,
+        height: !isSubOption ? 56 : 48,
+        paddingLeft: isSubOption ? 32 : 16,
       },
     })
   );

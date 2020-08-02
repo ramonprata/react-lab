@@ -5,12 +5,9 @@ import {
   Typography,
   Icon,
   IconButton,
-  Paper,
-  Switch,
-  FormControlLabel,
-  AppBar,
-} from '@material-ui/core';
-import { BoxContent, Logo } from '../../../shared/components';
+  Tooltip,
+} from '@material-ui/core/';
+import { Logo } from '../../../shared/components';
 /**
  * TODO: set props type flow js
  * type Props = {
@@ -19,7 +16,7 @@ import { BoxContent, Logo } from '../../../shared/components';
  */
 
 const Header = (props) => {
-  const { isMobile, toggleMenu, prefersDarkMode, setPrefersDarkMode } = props;
+  const { isMobile, toggleMenu, setPrefersDarkMode } = props;
   const { containerHeader } = useStyles()();
   return (
     <Grid container alignItems="center" className={containerHeader}>
@@ -33,21 +30,11 @@ const Header = (props) => {
         <Typography variant="h5">Rect lab</Typography>
       </Grid>
       <Grid container direction="row" justify="flex-end" item md={3} xs={4}>
-        <BoxContent pr={16}>
-          <FormControlLabel
-            labelPlacement="start"
-            control={
-              <Switch
-                checked={prefersDarkMode}
-                onChange={setPrefersDarkMode}
-                name="checkedA"
-                color="primary"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-              />
-            }
-            label="Dark mode"
-          />
-        </BoxContent>
+        <Tooltip title="dark/light mode">
+          <IconButton onClick={setPrefersDarkMode}>
+            <Icon color={'common'}>wb_incandescent</Icon>
+          </IconButton>
+        </Tooltip>
       </Grid>
     </Grid>
   );
@@ -59,6 +46,7 @@ const useStyles = () =>
       containerHeader: {
         height: '100%',
         borderBottom: `solid 1px ${theme.palette.grey[300]}`,
+        paddingRight: 8,
       },
     })
   );

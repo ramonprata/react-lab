@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
 import { SideMenu } from '../../navigation/';
 import Header from './header';
-import { defaultTheme } from '../../../shared/theme';
-import { Grid, Paper, Box, Typography } from '@material-ui/core';
 import { CssGridContainer, CssGridItem } from '../../../shared/components';
 
 /**
@@ -16,7 +15,7 @@ import { CssGridContainer, CssGridItem } from '../../../shared/components';
 const MainPage = (props) => {
   const { isMobile, prefersDarkMode, setPrefersDarkMode } = props;
   const [menuIsOpened, toggleMenu] = useState(true);
-  const { gridContainer, gridContent, menu, content } = useStyles(isMobile)();
+  const { gridContainer, content } = useStyles(isMobile)();
 
   const onToggleMenu = () => {
     toggleMenu(!menuIsOpened);

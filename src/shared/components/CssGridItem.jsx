@@ -13,17 +13,12 @@ const CssGridItem = (props: CssGridItemProps) => {
   );
 };
 
-type StartEnd = {
-  startLine: string | number,
-  endLine: string | number,
-};
-
 type CssGridItemProps = {
   style?: CSSProperties,
   className?: String,
   colStartEnd?: string,
   rowStartEnd?: string,
-  startEnd: string,
+  startEnd?: string,
   justify?: 'start' | 'end' | 'center' | 'stretch',
   align?: 'start' | 'end' | 'center' | 'stretch',
   placeSelf?: string,
@@ -44,7 +39,7 @@ const useStyles = (props: CssGridItemProps) => {
     align,
     placeSelf,
   } = props;
-  return makeStyles((theme) =>
+  return makeStyles((theme: Theme) =>
     createStyles({
       item: {
         gridColumn: startEnd || colStartEnd,
