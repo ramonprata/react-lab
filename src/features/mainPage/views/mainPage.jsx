@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { SideMenu } from '../../navigation/';
 import Header from './header';
 import { defaultTheme } from '../../../shared/theme';
 import { Grid, Paper, Box, Typography } from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { CssGridContainer, CssGridItem } from '../../../shared/components';
 
 /**

@@ -1,4 +1,5 @@
 import React from 'react';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -16,13 +17,14 @@ import { useHistory } from 'react-router-dom';
 const MenuOption = (props) => {
   const { label, icon, uri } = props;
   const history = useHistory();
+  const { listItemContainer } = useStyles()();
 
   const goTo = () => {
     history.push(uri);
   };
 
   return (
-    <ListItem button onClick={goTo}>
+    <ListItem button onClick={goTo} className={listItemContainer}>
       <ListItemIcon>
         <Icon>{icon}</Icon>
       </ListItemIcon>
@@ -30,5 +32,14 @@ const MenuOption = (props) => {
     </ListItem>
   );
 };
+
+const useStyles = () =>
+  makeStyles((theme) =>
+    createStyles({
+      listItemContainer: {
+        height: 56,
+      },
+    })
+  );
 
 export default MenuOption;

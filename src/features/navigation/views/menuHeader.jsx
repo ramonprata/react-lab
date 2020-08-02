@@ -1,4 +1,5 @@
 import React from 'react';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Typography, Grid, Icon, IconButton } from '@material-ui/core';
 import { defaultTheme } from '../../../shared/theme';
 import { BoxContent, Logo } from '../../../shared/components';
@@ -15,12 +16,13 @@ const MenuHeader = (props) => {
   const { menuIsOpened, toggleMenu, showContent, isMobile } = props;
   const padding = menuIsOpened && !isMobile ? 16 : 0;
   const justify = menuIsOpened ? 'space-between' : 'center';
+  const { headerContainer } = useStyles()();
   return (
     <Grid
       container
       direction="column"
       justify="center"
-      style={styles.headerContainer}
+      className={headerContainer}
     >
       <BoxContent pl={padding}>
         <Grid container direction="row" alignItems="center" justify={justify}>
@@ -37,11 +39,14 @@ const MenuHeader = (props) => {
   );
 };
 
-const styles = {
-  headerContainer: {
-    minHeight: defaultTheme.layout.headerHeight,
-    borderBottom: 'solid 1px #e0e0e0',
-  },
-};
+const useStyles = () =>
+  makeStyles((theme) =>
+    createStyles({
+      headerContainer: {
+        minHeight: defaultTheme.layout.headerHeight,
+        borderBottom: `solid 1px ${theme.palette.grey[300]}`,
+      },
+    })
+  );
 
 export default MenuHeader;
