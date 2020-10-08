@@ -15,67 +15,92 @@ export const objetosNasEstacoes = [
     trem:'A4',
     estacaoPatio: 'EJB4',
   },
+  {
+    trem:'A4',
+    estacaoPatio: 'EJB6',
+  },
 ];
 
 export const estacoesPatios = [
   {
-    nomeEstacao: 'ECO',
+    estacaoPatio: 'ECO',
   },
   {
-    nomeEstacao: 'EBY',
+    estacaoPatio: 'EBY',
   },
   {
-    nomeEstacao: 'EJB',
+    estacaoPatio: 'EJB',
   },
   {
-    nomeEstacao: 'EPO',
+    estacaoPatio: 'EPO',
   },
   {
-    nomeEstacao: 'ECO1',
+    estacaoPatio: 'ECO1',
   },
   {
-    nomeEstacao: 'EBY1',
+    estacaoPatio: 'EBY1',
   },
   {
-    nomeEstacao: 'EJB1',
+    estacaoPatio: 'EJB1',
   },
   {
-    nomeEstacao: 'EPO1',
+    estacaoPatio: 'EPO1',
   },
   {
-    nomeEstacao: 'ECO2',
+    estacaoPatio: 'ECO2',
   },
   {
-    nomeEstacao: 'EBY2',
+    estacaoPatio: 'EBY2',
   },
   {
-    nomeEstacao: 'EJB2',
+    estacaoPatio: 'EJB2',
   },
   {
-    nomeEstacao: 'EPO2',
+    estacaoPatio: 'EPO2',
   },
   {
-    nomeEstacao: 'ECO3',
+    estacaoPatio: 'ECO3',
   },
   {
-    nomeEstacao: 'EBY3',
+    estacaoPatio: 'EBY3',
   },
   {
-    nomeEstacao: 'EJB3',
+    estacaoPatio: 'EJB3',
   },
   {
-    nomeEstacao: 'EPO3',
+    estacaoPatio: 'EPO3',
   },
   {
-    nomeEstacao: 'ECO4',
+    estacaoPatio: 'ECO4',
   },
   {
-    nomeEstacao: 'EBY4',
+    estacaoPatio: 'EBY4',
   },
   {
-    nomeEstacao: 'EJB4',
+    estacaoPatio: 'EJB4',
   },
   {
-    nomeEstacao: 'EPO4',
+    estacaoPatio: 'EPO4',
+  },
+  {
+    estacaoPatio: 'ECO5',
+  },
+  {
+    estacaoPatio: 'EBY5',
+  },
+  {
+    estacaoPatio: 'EJB5',
+  },
+  {
+    estacaoPatio: 'EPO5',
+  },
+  {
+    estacaoPatio: 'EBY6',
+  },
+  {
+    estacaoPatio: 'EJB6',
+  },
+  {
+    estacaoPatio: 'EPO6',
   },
 ].map((estacao, idx) => ({...estacao, estacaoId: idx}));

@@ -57,7 +57,7 @@ const MainPage = (props) => {
   );
 };
 
-const useStyles = (isMobile = false) =>
+const useStyles = (primary = false) =>
   makeStyles((theme) =>
     createStyles({
       gridContainer: {
