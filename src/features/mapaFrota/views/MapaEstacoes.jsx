@@ -37,7 +37,8 @@ const MapaEstacoes = (props) => {
               position: 'absolute',
               backgroundColor: '#166188',
               left: positionObjeto - larguraObjeto / 2,
-              bottom: linha.height + 50,
+              bottom: !floxoSubindo ? linha.height + 50 : 'unset',
+              top: floxoSubindo ? linha.height + 50 : 'unset',
             }}
           />
         )}
