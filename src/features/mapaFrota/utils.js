@@ -1,3 +1,6 @@
+export const STATUS_FROTA ={vazios: 'Vazios', carregados: 'Carregados'};
+export const FLUXOS_FROTA ={subindo:'Subindo', descendo:'Descendo'};
+
 export const MAX_WIDTH_OBJ = 100;
 export const MAX_HEIGHT_OBJ = 28;
 export const DISTANCIA_ENTRE_ESTACOES = 16;
@@ -26,6 +29,7 @@ export const calcPercentualPosicaObjeto = (idx, posicaoMarco) => {
 };
 
 export const getObjetoNaEstacao = (objetosNasEstacoes, estacaoTrem) => {
+ 
   let indexEstacaoEntreMarcos;
   for (let objeto of objetosNasEstacoes) {
     const objetoNaEstacao = objeto.Patio === estacaoTrem.estacaoPatio;
@@ -112,4 +116,8 @@ export const getMaximoTamanhoMapa = (estacoesComPosicoes) => {
   } else {
     return '100vw'
   }
+};
+
+export const isFluxoSubindo = (sentido) => {
+  return sentido === FLUXOS_FROTA.subindo;
 };

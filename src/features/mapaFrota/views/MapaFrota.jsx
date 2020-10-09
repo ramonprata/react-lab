@@ -1,172 +1,125 @@
 import React from 'react';
-import { mapaEstacoesGraoDictionaty } from '../dados.mock';
 import FrotaFluxo from './FrotaFluxo';
-import { ReactComponent as Arrow } from '../assets/arrow-svg.svg';
-import { getEstacoesComPosicoes, getMaximoTamanhoMapa } from '../utils';
-import { Paper } from '@material-ui/core';
-import { useRef } from 'react';
-
-let estacoesComProximos = [];
-
-Object.values(mapaEstacoesGraoDictionaty).forEach((estacao) => {
-  const proximosPontos = estacao.proximos
-    ? estacao.proximos.slice(0, Math.ceil(0.7 * estacao.proximos.length))
-    : [];
-  estacoesComProximos.push(estacao, ...proximosPontos);
-});
-
-const trens = [{ Patio: 'ZBL' }];
-
-const estacoesComPosicoes = getEstacoesComPosicoes(estacoesComProximos);
+import { getMaximoTamanhoMapa, STATUS_FROTA, FLUXOS_FROTA } from '../utils';
+import StatusFrota from './StatusFrota';
+import SentidoFluxo from './SentidoFluxo';
+import Estacoes from './Estacoes';
 
 const MapaFrota = (props) => {
-  const { page, container, containerStatus, paper } = styles;
-  const mapaRef = useRef(null);
+  const { trens, estacoesComPosicoes } = props;
+  const maxWidthMapa = getMaximoTamanhoMapa(estacoesComPosicoes);
 
-  const getPosicaoStatus = () => {
-    console.log('mapaRef :>> ', mapaRef);
-    if (mapaRef.current) {
-      console.log(
-        'mapaRef.current.offsetHeight :>> ',
-        mapaRef.current.offsetHeight
-      );
-      return mapaRef.current.offsetHeight / 2;
-    }
-  };
+  const { subindo, descendo } = FLUXOS_FROTA;
+  const { vazios, carregados } = STATUS_FROTA;
 
-  const renderStatus = (status) => {
-    return (
-      <div style={containerStatus}>
-        <span>{status}</span>
-      </div>
-    );
-  };
-
-  const renderSentidoFluxo = (sentido) => {
-    const fluxoSubindo = sentido === 'Subindo';
-    return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-          color: '#aaa',
-          width: 120,
-          height: 40,
-        }}
-      >
-        {fluxoSubindo && <Arrow />}
-        <span>{sentido}</span>
-        {!fluxoSubindo && <Arrow style={{ transform: 'rotate(180deg)' }} />}
-      </div>
-    );
-  };
+  const {
+    page,
+    container,
+    gridMapa,
+    gridFluxoFrota,
+    sentidoFluxoContainer,
+  } = getStyles(maxWidthMapa);
 
   return (
     <React.Fragment>
       <div style={page}>
-        <div style={paper} ref={mapaRef}>
-          <div style={container}>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr',
-                gridTemplateRows: '300px 300px',
-              }}
-            >
-              {renderStatus('Vazios')}
+        <div style={container}>
+          <StatusFrota />
 
-              {renderStatus('Carregados')}
+          <div style={gridMapa}>
+            <div style={gridFluxoFrota}>
+              <FrotaFluxo
+                status={vazios}
+                sentidoFluxo={subindo}
+                maxWidthMapa={maxWidthMapa}
+                estacoes={
+                  <Estacoes
+                    sentidoFluxo={subindo}
+                    estacoesComPosicoes={estacoesComPosicoes}
+                    trens={trens}
+                  />
+                }
+              />
             </div>
 
             <div
               style={{
-                display: 'grid',
-                justifyItems: 'center',
-                gridTemplateColumns: '1fr',
-                gridTemplateRows: '300px 300px',
-                overflowX: 'auto',
-                width: '80vw',
+                ...gridFluxoFrota,
+                ...gridFluxoFrota.fluxoDescendo,
               }}
             >
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr',
-                  gridTemplateRows: '1fr 28px',
-                  width: getMaximoTamanhoMapa(estacoesComPosicoes),
-                  position: 'relative',
-                }}
-              >
-                <FrotaFluxo
-                  status="Vazios"
-                  sentidoFluxo="Subindo"
-                  estacoesComPosicoes={estacoesComPosicoes}
-                  trens={trens}
-                />
-              </div>
-
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr',
-                  gridTemplateRows: '28px 1fr',
-                  width: getMaximoTamanhoMapa(estacoesComPosicoes),
-                  borderTop: 'dotted 1px #ccc',
-                  position: 'relative',
-                }}
-              >
-                {/* {renderSentidoFluxo('Descendo')} */}
-
-                <FrotaFluxo
-                  status="Carregados"
-                  sentidoFluxo="Descendo"
-                  estacoesComPosicoes={estacoesComPosicoes}
-                  trens={trens}
-                />
-              </div>
+              <FrotaFluxo
+                status={carregados}
+                sentidoFluxo={descendo}
+                maxWidthMapa={maxWidthMapa}
+                estacoes={
+                  <Estacoes
+                    sentidoFluxo={descendo}
+                    estacoesComPosicoes={estacoesComPosicoes}
+                    trens={trens}
+                  />
+                }
+              />
             </div>
           </div>
-        </div>
-        <div style={{ position: 'relative', right: 120 }}>
-          <div>{renderSentidoFluxo('Subindo')}</div>
-          <div>{renderSentidoFluxo('Descendo')}</div>
+          <div style={sentidoFluxoContainer}>
+            <SentidoFluxo sentido={subindo} />
+            <SentidoFluxo sentido={descendo} />
+          </div>
         </div>
       </div>
     </React.Fragment>
   );
 };
 
-const styles = {
-  page: {
-    margin: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100vw',
-    height: '100vh',
-    padding: 16,
-  },
-  container: {
-    display: 'grid',
-    gridTemplateColumns: '32px auto',
-    gridTemplateRows: 'auto',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  paper: {
-    border: '1px solid #ccc',
-  },
+const getStyles = (maxWidthMapa) => {
+  return {
+    page: {
+      margin: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      position: 'absolute',
+      height: '100vh',
+      width: '100vw',
+    },
 
-  containerStatus: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textOrientation: 'mixed',
-    writingMode: 'vertical-rl',
-    color: '#aaa',
-    transform: 'rotate(180deg)',
-  },
+    container: {
+      border: '1px solid #ccc',
+      display: 'grid',
+      gridTemplateColumns: '32px auto',
+      gridTemplateRows: 'auto',
+      alignItems: 'center',
+      justifyContent: 'center',
+      position: 'absolute',
+    },
+
+    gridMapa: {
+      display: 'grid',
+      justifyItems: 'center',
+      gridTemplateColumns: '1fr',
+      gridTemplateRows: '300px 300px',
+      overflowX: 'auto',
+      width: '80vw',
+    },
+
+    gridFluxoFrota: {
+      display: 'grid',
+      gridTemplateColumns: '1fr',
+      gridTemplateRows: '1fr 28px',
+      width: maxWidthMapa,
+      position: 'relative',
+      fluxoDescendo: {
+        gridTemplateRows: '28px 1fr',
+        borderTop: 'dotted 1px #ccc',
+      },
+    },
+
+    sentidoFluxoContainer: {
+      position: 'absolute',
+      right: 0,
+      bottom: 260,
+    },
+  };
 };
 export default MapaFrota;

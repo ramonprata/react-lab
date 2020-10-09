@@ -3,9 +3,12 @@ import {
   calcPercentualPosicaObjeto,
   getObjetoNaEstacao,
   getPositionX,
+  isFluxoSubindo,
 } from '../utils';
 
-const MapaEstacoes = (props) => {
+const TAMANHO_PONTO_ESTACAO = 8;
+
+const Estacoes = (props) => {
   const { sentidoFluxo, estacoesComPosicoes, trens } = props;
 
   const {
@@ -17,7 +20,7 @@ const MapaEstacoes = (props) => {
 
   return estacoesComPosicoes.map((estacao, idx) => {
     const { indexEstacaoEntreMarcos } = getObjetoNaEstacao(trens, estacao);
-    const floxoSubindo = sentidoFluxo === 'Subindo';
+    const floxoSubindo = isFluxoSubindo(sentidoFluxo);
 
     const positionX = getPositionX(idx, estacao.marco);
     const positionObjeto = calcPercentualPosicaObjeto(
@@ -25,7 +28,7 @@ const MapaEstacoes = (props) => {
       estacao.positionX
     );
 
-    const larguraObjeto = 32;
+    const larguraObjeto = 28;
 
     return (
       <React.Fragment>
@@ -33,12 +36,16 @@ const MapaEstacoes = (props) => {
           <div
             style={{
               width: larguraObjeto,
-              height: 32,
+              height: 28,
               position: 'absolute',
               backgroundColor: '#166188',
               left: positionObjeto - larguraObjeto / 2,
-              bottom: !floxoSubindo ? linha.height + 50 : 'unset',
-              top: floxoSubindo ? linha.height + 50 : 'unset',
+              bottom: !floxoSubindo
+                ? linha.height + paradaContainer.height - TAMANHO_PONTO_ESTACAO
+                : 'unset',
+              top: floxoSubindo
+                ? linha.height + paradaContainer.height - TAMANHO_PONTO_ESTACAO
+                : 'unset',
             }}
           />
         )}
@@ -47,9 +54,12 @@ const MapaEstacoes = (props) => {
             style={{
               ...linha,
               left: positionObjeto,
-              bottom: !floxoSubindo ? 50 : 'unset',
-              top: floxoSubindo ? 50 : 'unset',
-              zIndex: 99,
+              bottom: !floxoSubindo
+                ? paradaContainer.height - TAMANHO_PONTO_ESTACAO
+                : 'unset',
+              top: floxoSubindo
+                ? paradaContainer.height - TAMANHO_PONTO_ESTACAO
+                : 'unset',
             }}
           />
         )}
@@ -71,7 +81,7 @@ const MapaEstacoes = (props) => {
           <div
             style={{
               ...containerTexto,
-              color: estacao.marco ? '#000' : 'transparent',
+              color: estacao.marco ? '#aaa' : 'transparent',
             }}
           >
             <div style={{ height: 32 }}>{estacao.estacaoPatio}</div>
@@ -87,17 +97,18 @@ const getStyles = () => ({
     display: 'flex',
     position: 'absolute',
     backgroundColor: '#fff',
-    height: 60,
+    height: 48,
   },
+
   marcadorEstacao: {
-    width: 8,
-    height: 8,
+    width: TAMANHO_PONTO_ESTACAO,
+    height: TAMANHO_PONTO_ESTACAO,
     borderRadius: 4,
-    zIndex: 2,
+    zIndex: 1,
   },
 
   linha: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#ddd',
     width: 2,
     position: 'absolute',
     height: 100,
@@ -107,9 +118,10 @@ const getStyles = () => ({
     textOrientation: 'mixed',
     writingMode: 'vertical-rl',
     transform: 'rotate(180deg)',
-    textAlign: 'left',
-    fontSize: 14,
+    textAlign: 'center',
+    fontSize: 12,
+    fontWeight: 'bold',
   },
 });
 
-export default MapaEstacoes;
+export default Estacoes;

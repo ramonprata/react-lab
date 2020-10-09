@@ -1,35 +1,25 @@
 import React from 'react';
-import { MAX_WIDTH_OBJ, MAX_HEIGHT_OBJ, getMaximoTamanhoMapa } from '../utils';
-import MapaEstacoes from './MapaEstacoes';
+import { getMaximoTamanhoMapa, isFluxoSubindo } from '../utils';
+import Estacoes from './Estacoes';
 
 const FrotaFluxo = (props) => {
-  const { sentidoFluxo, estacoesComPosicoes, trens } = props;
-  const { mapa, linhaPontilhada, containerEstacoes } = getStyles(
-    estacoesComPosicoes
-  );
-
-  const fluxoSubindo = sentidoFluxo === 'Subindo';
-  const posicaoEstacoes = fluxoSubindo
-    ? {
-        top: 0,
-      }
-    : {
-        bottom: 0,
-      };
+  const { sentidoFluxo, maxWidthMapa, estacoes } = props;
+  const { mapa, linhaPontilhada, containerEstacoes } = getStyles(maxWidthMapa);
+  const fluxoSubindo = isFluxoSubindo(sentidoFluxo);
+  const posicaoEstacoes = {
+    top: fluxoSubindo ? 0 : 'unset',
+    bottom: !fluxoSubindo ? 0 : 'unset',
+  };
 
   return (
     <div style={{ ...mapa }}>
       <div style={{ ...containerEstacoes, ...posicaoEstacoes }}>
-        <MapaEstacoes
-          sentidoFluxo={sentidoFluxo}
-          estacoesComPosicoes={estacoesComPosicoes}
-          trens={trens}
-        />
+        {estacoes}
         <hr
           style={{
             ...linhaPontilhada,
-            bottom: fluxoSubindo ? 0 : 'unset',
-            top: !fluxoSubindo ? 0 : 'unset',
+            bottom: posicaoEstacoes.top - 3,
+            top: posicaoEstacoes.bottom - 3,
           }}
         />
       </div>
@@ -37,10 +27,9 @@ const FrotaFluxo = (props) => {
   );
 };
 
-const getStyles = (estacoesComPosicoes) => {
+const getStyles = (maxWidthMapa) => {
   return {
     mapa: {
-      // backgroundColor: 'violet',
       position: 'absolute',
       height: '100%',
       width: '100%',
@@ -48,13 +37,14 @@ const getStyles = (estacoesComPosicoes) => {
     linhaPontilhada: {
       border: 'none',
       borderTop: '2px dotted #000',
-      width: getMaximoTamanhoMapa(estacoesComPosicoes),
+      width: maxWidthMapa,
       left: 0,
       position: 'absolute',
+      zIndex: 0,
     },
     containerEstacoes: {
       position: 'absolute',
-      height: 60,
+      height: 48,
       width: '100%',
       bottom: 0,
     },
