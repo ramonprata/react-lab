@@ -3,7 +3,7 @@ export const MAX_HEIGHT_OBJ = 28;
 export const DISTANCIA_ENTRE_ESTACOES = 16;
 
 export const getPositionX = (idx = 0, marco = false) => {
-  return idx > 0 ? idx * DISTANCIA_ENTRE_ESTACOES : 1;
+  return idx > 0 ? idx * DISTANCIA_ENTRE_ESTACOES : 0;
 };
 
 export const objetoNasProximasEstacoes = (objeto, estacaoTrem) => {
@@ -11,7 +11,7 @@ export const objetoNasProximasEstacoes = (objeto, estacaoTrem) => {
   let indexEstacaoEntreMarcos =
     estacaoTrem.proximos &&
     estacaoTrem.proximos.findIndex(
-      (e) => e.estacaoPatio === objeto.Patio
+      (e) => e === objeto.Patio
     );
 
   return {
@@ -103,4 +103,13 @@ export const calcPositionYObjetos = (objetos) => {
       atualizaPositionYObjetos(objeto, idx, self);
       return objeto;
     });
+};
+
+
+export const getMaximoTamanhoMapa = (estacoesComPosicoes) => {
+  if(estacoesComPosicoes) {
+    return estacoesComPosicoes.length * 16
+  } else {
+    return '100vw'
+  }
 };

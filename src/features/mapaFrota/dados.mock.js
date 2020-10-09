@@ -25,7 +25,7 @@ export const mapaEstacoesGraoDictionaty = {
     marco: true,
     carregamento: false,
     descarregamento: false,
-    proximos: ['', ''],
+    proximos: ['', 'ZBL'],
   },
   EPO: {
     estacaoPatio: 'EPO',
