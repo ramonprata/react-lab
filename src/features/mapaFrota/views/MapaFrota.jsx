@@ -4,6 +4,7 @@ import { getMaximoTamanhoMapa, STATUS_FROTA, FLUXOS_FROTA } from '../utils';
 import StatusFrota from './StatusFrota';
 import SentidoFluxo from './SentidoFluxo';
 import Estacoes from './Estacoes';
+import ObjetosEstacoes from './ObjetosEstacoes';
 
 const MapaFrota = (props) => {
   const { trens, estacoesComPosicoes } = props;
@@ -39,6 +40,12 @@ const MapaFrota = (props) => {
                     trens={trens}
                   />
                 }
+                objetosEstacoes={
+                  <ObjetosEstacoes
+                    estacoesComPosicoes={estacoesComPosicoes}
+                    sentidoFluxo={subindo}
+                  />
+                }
               />
             </div>
 
@@ -57,6 +64,12 @@ const MapaFrota = (props) => {
                     sentidoFluxo={descendo}
                     estacoesComPosicoes={estacoesComPosicoes}
                     trens={trens}
+                  />
+                }
+                objetosEstacoes={
+                  <ObjetosEstacoes
+                    estacoesComPosicoes={estacoesComPosicoes}
+                    sentidoFluxo={descendo}
                   />
                 }
               />

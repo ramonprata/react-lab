@@ -1,6 +1,53 @@
 export const trens = [
   {
-    Patio: 'ZBL',
+    Patio: 'EYH',
+    LocalidadeAtual: 'EYH',
+    Codigo: 'J782',
+    Vagoes: [
+      {
+        QuantidadeVagoes: 40,
+        Destino: 'ZOP',
+      },
+      {
+        QuantidadeVagoes: 40,
+        Destino: 'ZZB',
+      },
+    ],
+  },
+  {
+    Patio: 'EYG',
+    LocalidadeAtual: 'EYG',
+    Codigo: 'J782',
+    Vagoes: [
+      {
+        QuantidadeVagoes: 40,
+        Destino: 'ZOP',
+      },
+      {
+        QuantidadeVagoes: 40,
+        Destino: 'ZZB',
+      },
+    ],
+  },
+  {
+    Patio: 'ZCB',
+    LocalidadeAtual: 'ZCB',
+    Codigo: 'J782',
+    Vagoes: [
+      {
+        QuantidadeVagoes: 40,
+        Destino: 'ZOP',
+      },
+    ],
+  },
+];
+
+export const vagoes = [
+  {
+    LocalidadeAtual: 'EBU',
+    Situacao: 'Carregado',
+    TempoPermanencia: 3,
+    QuantidadeVagoes: 53,
   },
 ];
 
@@ -31,7 +78,7 @@ export const mapaEstacoesGraoDictionaty = {
     marco: true,
     carregamento: false,
     descarregamento: false,
-    proximos: ['', 'ZBL'],
+    proximos: ['', ''],
   },
   EPO: {
     estacaoPatio: 'EPO',
@@ -215,3 +262,88 @@ export const mapaEstacoesGraoDictionaty = {
   },
 };
 
+// {​​​​​​​​
+// Trens:
+//    [{​​​​​​​​
+// Codigo: 'J782',
+// Destino: {​​​​​​​​
+// QuantidadeVagoes: 40
+// Local: ZOP
+// }​​​​​​​​,
+
+// Destino: {​​​​​​​​
+// QuantidadeVagoes: 30
+// Local: ZZB
+// }​​​​​​​​,
+
+// Situacao: 'Carregado'
+// LocalidadeAtual: 'ZBL' (pode ser patio ou Estacao)
+// }​​​​​​​​,
+
+// ]
+// Vagoes: [
+// {​​​​​​​​
+//  LocalidadeAtual: 'PAT1',
+//  Situacao: 'Carregado'
+//  TempoPermanencia: 3 (estagios)
+//  Vagoes: {​​​​​​​​
+//   QuantidadeTotal: 53,
+
+//   Destinos: [
+
+// {​​​​​​​​
+
+// QuantidadeVagoesRetidos: 23,
+// QuantidadeVagoesNaoRetidos: 10,
+
+// Local: ZZL,
+//  }​​​​​​​​,
+
+// {​​​​​​​​
+
+// QuantidadeVagoesRetidos: 30,
+// QuantidadeVagoesNaoRetidos: 15
+
+// Local: ZBL
+//}​​​​​​​​
+
+// ]
+
+// }​​​​​​​​
+
+// }​​​​​​​​,
+
+// {​​​​​​​​
+//  LocalidadeAtual: 'PAT2',
+//  Situacao: 'Descarregado'
+//  TempoPermanencia: 3 (estagios)
+//  Vagoes: {​​​​​​​​
+//   QuantidadeTotal: 33,
+
+//   QuantidadeVagoesRetidos: 23,
+//   QuantidadeVagoesNaoRetidos: 10 }​​​​​​​​,
+
+//}​​​​​​​​
+
+// ]
+
+// }​​​​​​​​
+
+// }​​​​​​​​,
+
+// ],
+// Ativos: {​​​​​​​​
+//     Total: 2500,
+//     Disponivel: 1200,
+//     Retido: 300,
+//     EmTrem: {​​​​​​​​
+//    SubindoVazio: 100,
+//    DescendoCarregado: 250
+//     }​​​​​​​​,
+//     Desanexados: {​​​​​​​​
+//   Carregados: 260,
+//   Vazios: 300
+//     }​​​​​​​​,
+//     Percentuais:
+//     DataAtualizacaoDado: '2020-10-02 15:30:00'
+// }​​​​​​​​

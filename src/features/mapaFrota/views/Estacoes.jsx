@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  calcPercentualPosicaObjeto,
-  getObjetoNaEstacao,
-  getPositionX,
-  isFluxoSubindo,
-} from '../utils';
-
-const TAMANHO_PONTO_ESTACAO = 8;
+import { getPositionX, isFluxoSubindo, TAMANHO_PONTO_ESTACAO } from '../utils';
 
 const Estacoes = (props) => {
   const { sentidoFluxo, estacoesComPosicoes, trens } = props;
@@ -19,20 +12,12 @@ const Estacoes = (props) => {
   } = getStyles();
 
   return estacoesComPosicoes.map((estacao, idx) => {
-    const { indexEstacaoEntreMarcos } = getObjetoNaEstacao(trens, estacao);
     const floxoSubindo = isFluxoSubindo(sentidoFluxo);
-
     const positionX = getPositionX(idx, estacao.marco);
-    const positionObjeto = calcPercentualPosicaObjeto(
-      indexEstacaoEntreMarcos,
-      estacao.positionX
-    );
-
-    const larguraObjeto = 28;
 
     return (
       <React.Fragment>
-        {indexEstacaoEntreMarcos > 0 && (
+        {/* {indexEstacaoEntreMarcos > 0 && (
           <div
             style={{
               width: larguraObjeto,
@@ -48,8 +33,8 @@ const Estacoes = (props) => {
                 : 'unset',
             }}
           />
-        )}
-        {indexEstacaoEntreMarcos > 0 && (
+        )} */}
+        {/* {indexEstacaoEntreMarcos > 0 && (
           <div
             style={{
               ...linha,
@@ -62,7 +47,7 @@ const Estacoes = (props) => {
                 : 'unset',
             }}
           />
-        )}
+        )} */}
         <div
           style={{
             ...paradaContainer,
@@ -105,13 +90,6 @@ const getStyles = () => ({
     height: TAMANHO_PONTO_ESTACAO,
     borderRadius: 4,
     zIndex: 1,
-  },
-
-  linha: {
-    backgroundColor: '#ddd',
-    width: 2,
-    position: 'absolute',
-    height: 100,
   },
 
   containerTexto: {

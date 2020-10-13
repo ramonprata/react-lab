@@ -3,7 +3,7 @@ import { getMaximoTamanhoMapa, isFluxoSubindo } from '../utils';
 import Estacoes from './Estacoes';
 
 const FrotaFluxo = (props) => {
-  const { sentidoFluxo, maxWidthMapa, estacoes } = props;
+  const { sentidoFluxo, maxWidthMapa, estacoes, objetosEstacoes } = props;
   const { mapa, linhaPontilhada, containerEstacoes } = getStyles(maxWidthMapa);
   const fluxoSubindo = isFluxoSubindo(sentidoFluxo);
   const posicaoEstacoes = {
@@ -15,6 +15,7 @@ const FrotaFluxo = (props) => {
     <div style={{ ...mapa }}>
       <div style={{ ...containerEstacoes, ...posicaoEstacoes }}>
         {estacoes}
+        {objetosEstacoes}
         <hr
           style={{
             ...linhaPontilhada,
@@ -36,7 +37,7 @@ const getStyles = (maxWidthMapa) => {
     },
     linhaPontilhada: {
       border: 'none',
-      borderTop: '2px dotted #000',
+      borderTop: '2px dotted #aaa',
       width: maxWidthMapa,
       left: 0,
       position: 'absolute',

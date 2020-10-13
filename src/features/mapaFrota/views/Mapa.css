@@ -1,0 +1,19 @@
+.trem-subindo:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top: 14px solid white;
+  border-left: 14px solid #166188;
+  width: 0;
+}
+
+.trem-descendo:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top: 14px solid white;
+  border-right: 14px solid #166188;
+  width: 0;
+}
