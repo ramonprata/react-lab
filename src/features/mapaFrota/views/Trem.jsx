@@ -18,8 +18,8 @@ const Trem = (props) => {
 const getStyles = (subindo) => {
   return {
     tremContent: {
-      maxWidth: TREM_WIDTH,
-      padding: '0 16px',
+      width: TREM_WIDTH,
+      padding: '0 8px',
       height: MAX_HEIGHT_OBJ,
       backgroundColor: '#166188',
       display: 'flex',
