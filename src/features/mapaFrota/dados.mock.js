@@ -1,6 +1,5 @@
 export const trens = [
   {
-    Patio: 'EYH',
     LocalidadeAtual: 'EYH',
     Codigo: 'J782',
     Vagoes: [
@@ -15,7 +14,20 @@ export const trens = [
     ],
   },
   {
-    Patio: 'EYG',
+    LocalidadeAtual: 'EPO',
+    Codigo: 'J782',
+    Vagoes: [
+      {
+        QuantidadeVagoes: 40,
+        Destino: 'ZOP',
+      },
+      {
+        QuantidadeVagoes: 40,
+        Destino: 'ZZB',
+      },
+    ],
+  },
+  {
     LocalidadeAtual: 'EYG',
     Codigo: 'J782',
     Vagoes: [
@@ -30,7 +42,6 @@ export const trens = [
     ],
   },
   {
-    Patio: 'ZCB',
     LocalidadeAtual: 'ZCB',
     Codigo: 'J782',
     Vagoes: [
@@ -44,11 +55,35 @@ export const trens = [
 
 export const vagoes = [
   {
-    LocalidadeAtual: 'EBU',
+    LocalidadeAtual: 'EPO',
     Situacao: 'Carregado',
     TempoPermanencia: 3,
     QuantidadeVagoes: 53,
   },
+  {
+    LocalidadeAtual: 'EGN',
+    Situacao: 'Carregado',
+    TempoPermanencia: 3,
+    QuantidadeVagoes: 53,
+  },
+  {
+    LocalidadeAtual: 'EYG',
+    Situacao: 'Carregado',
+    TempoPermanencia: 3,
+    QuantidadeVagoes: 53,
+  },
+  // {
+  //   LocalidadeAtual: 'EYG',
+  //   Situacao: 'Carregado',
+  //   TempoPermanencia: 3,
+  //   QuantidadeVagoes: 53,
+  // },
+  // {
+  //   LocalidadeAtual: 'EYG',
+  //   Situacao: 'Carregado',
+  //   TempoPermanencia: 3,
+  //   QuantidadeVagoes: 53,
+  // },
 ];
 
 export const mapaEstacoesGraoDictionaty = {

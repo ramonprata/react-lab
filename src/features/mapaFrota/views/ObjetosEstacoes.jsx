@@ -27,8 +27,13 @@ const ObjetosEstacoes = (props) => {
       <React.Fragment>
         <Trem subindo={fluxoSubindo} trem={trem} />
         {trem.Vagoes &&
-          trem.Vagoes.map((vagao) => (
-            <Vagao subindo={fluxoSubindo} acoplado={true} vagao={vagao} />
+          trem.Vagoes.map((vagao, idx) => (
+            <Vagao
+              key={`vagao-${idx}`}
+              subindo={fluxoSubindo}
+              acoplado={true}
+              vagao={vagao}
+            />
           ))}
       </React.Fragment>
     );
@@ -38,12 +43,12 @@ const ObjetosEstacoes = (props) => {
     return <Vagao subindo={fluxoSubindo} acoplado={false} vagao={vagao} />;
   };
 
-  return [...trensRender, ...vagoesRender].map((tremVagao, idx, self) => {
+  return [...vagoesRender, ...trensRender].map((tremVagao, idx, self) => {
     const renderizaTrem = tremVagao.tipo === 'trem';
     atualizaPositionYObjetos(tremVagao, idx, self);
     const paradaContainer = 42;
     return (
-      <React.Fragment>
+      <React.Fragment key={`objeto-estacao-${idx}`}>
         <div
           style={{
             ...objetoContainer,
@@ -80,8 +85,8 @@ const getStyles = () => {
       display: 'flex',
     },
     linha: {
-      backgroundColor: '#bbb',
-      width: 1,
+      backgroundColor: '#ddd',
+      width: 2,
       position: 'absolute',
     },
   };

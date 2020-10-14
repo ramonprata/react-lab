@@ -24,7 +24,7 @@ const getStyles = () => {
       alignItems: 'center',
       color: '#aaa',
       width: 110,
-      height: 40,
+      height: 28,
     },
     sentidoInvertido: {
       transform: 'rotate(180deg)',

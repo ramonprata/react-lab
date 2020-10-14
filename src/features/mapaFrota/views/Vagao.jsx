@@ -8,7 +8,6 @@ import './Mapa.css';
 
 const Vagao = (props) => {
   const { subindo, acoplado, vagao } = props;
-  console.log('vagao :>> ', vagao);
   const { vagaoContent } = getStyles(acoplado);
   return (
     <div style={vagaoContent}>

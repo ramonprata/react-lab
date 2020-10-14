@@ -16,38 +16,7 @@ const Estacoes = (props) => {
     const positionX = getPositionX(idx, estacao.marco);
 
     return (
-      <React.Fragment>
-        {/* {indexEstacaoEntreMarcos > 0 && (
-          <div
-            style={{
-              width: larguraObjeto,
-              height: 28,
-              position: 'absolute',
-              backgroundColor: '#166188',
-              left: positionObjeto - larguraObjeto / 2,
-              bottom: !floxoSubindo
-                ? linha.height + paradaContainer.height - TAMANHO_PONTO_ESTACAO
-                : 'unset',
-              top: floxoSubindo
-                ? linha.height + paradaContainer.height - TAMANHO_PONTO_ESTACAO
-                : 'unset',
-            }}
-          />
-        )} */}
-        {/* {indexEstacaoEntreMarcos > 0 && (
-          <div
-            style={{
-              ...linha,
-              left: positionObjeto,
-              bottom: !floxoSubindo
-                ? paradaContainer.height - TAMANHO_PONTO_ESTACAO
-                : 'unset',
-              top: floxoSubindo
-                ? paradaContainer.height - TAMANHO_PONTO_ESTACAO
-                : 'unset',
-            }}
-          />
-        )} */}
+      <React.Fragment key={`estacao-${idx}`}>
         <div
           style={{
             ...paradaContainer,

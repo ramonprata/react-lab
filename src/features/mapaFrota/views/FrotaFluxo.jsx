@@ -13,9 +13,9 @@ const FrotaFluxo = (props) => {
 
   return (
     <div style={{ ...mapa }}>
+      {objetosEstacoes}
       <div style={{ ...containerEstacoes, ...posicaoEstacoes }}>
         {estacoes}
-        {objetosEstacoes}
         <hr
           style={{
             ...linhaPontilhada,
@@ -31,14 +31,13 @@ const FrotaFluxo = (props) => {
 const getStyles = (maxWidthMapa) => {
   return {
     mapa: {
-      position: 'absolute',
       height: '100%',
       width: '100%',
     },
     linhaPontilhada: {
       border: 'none',
       borderTop: '2px dotted #aaa',
-      width: maxWidthMapa,
+      minWidth: maxWidthMapa,
       left: 0,
       position: 'absolute',
       zIndex: 0,

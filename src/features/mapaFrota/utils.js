@@ -16,7 +16,7 @@ export const getPositionX = (idx = 0) => {
 export const objetoNasProximasEstacoes = (objeto, estacaoTrem) => {
   let indexEstacaoEntreMarcos =
     estacaoTrem.proximos &&
-    estacaoTrem.proximos.findIndex((e) => e === objeto.Patio);
+    estacaoTrem.proximos.findIndex((e) => e === objeto.LocalidadeAtual);
 
   return {
     estacaoEncontrada: Boolean(indexEstacaoEntreMarcos >= 0),
@@ -97,23 +97,24 @@ export const atualizaPositionYObjetos = (
   indexObjetoAtual,
   objetos
 ) => {
+
   const estacoesObjetoOcupa = Math.ceil(
     objetoAtual.width / DISTANCIA_ENTRE_ESTACOES
   );
 
-  let contador = indexObjetoAtual;
-  while (contador < estacoesObjetoOcupa) {
-    let corrente = objetos[contador];
-    let proximo = objetos[contador + 1];
+  const proximosAfetados = Math.ceil(estacoesObjetoOcupa / 2);
+  let contadorProximos = 0;
+
+  while (contadorProximos <= proximosAfetados) {
+    let corrente = objetos[indexObjetoAtual];
+    let proximo = objetos[indexObjetoAtual + 1];
     if (proximo) {
       const diffWidth = proximo.positionX - corrente.positionX;
-      const diffHeight = proximo.positionY === corrente.positionY;
-
-      if (diffWidth <= corrente.width &&  diffHeight) {
+      if (diffWidth <= corrente.width) {
         proximo.positionY = corrente.positionY + MAX_HEIGHT_OBJ + 10;
       }
     }
-    contador++;
+    contadorProximos++;
   }
 };
 
