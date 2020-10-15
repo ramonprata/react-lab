@@ -34,7 +34,7 @@ const MapaFrota = (props) => {
 
   const handleWeel = (e) => {
     if (mapaRef && mapaRef.current) {
-      const amountScroll = mapaRef.current.scrollLeft + e.deltaY;
+      const amountScroll = mapaRef.current.scrollLeft + e.deltaY / 2;
       mapaRef.current.scrollTo({
         top: 0,
         left: amountScroll,
@@ -105,7 +105,6 @@ const getStyles = (maxWidthMapa) => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '100vh',
       width: '100vw',
       overflowY: 'auto',
       padding: '16px 0',
@@ -119,6 +118,7 @@ const getStyles = (maxWidthMapa) => {
       alignItems: 'center',
       justifyContent: 'center',
       position: 'relative',
+      // backgroundColor: 'violet',
     },
 
     gridMapa: {

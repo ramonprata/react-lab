@@ -3,7 +3,7 @@ export const FLUXOS_FROTA = { subindo: 'Subindo', descendo: 'Descendo' };
 
 export const MAX_HEIGHT_OBJ = 24;
 export const DISTANCIA_ENTRE_ESTACOES = 16;
-export const TREM_WIDTH = 64;
+export const TREM_WIDTH = 56;
 export const VAGAO_ACOPLADO_WIDTH = 72;
 export const VAGAO_DESACOPLADO_WIDTH = 34;
 export const TAMANHO_PONTO_ESTACAO = 8;
