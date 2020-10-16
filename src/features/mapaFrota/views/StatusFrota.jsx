@@ -23,7 +23,7 @@ const getStyles = () => {
     gridStatus: {
       display: 'grid',
       gridTemplateColumns: '1fr',
-      gridTemplateRows: '300px 300px',
+      alignSelf: 'stretch',
     },
     contentStatus: {
       display: 'flex',

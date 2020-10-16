@@ -5,6 +5,7 @@ import StatusFrota from './StatusFrota';
 import SentidoFluxo from './SentidoFluxo';
 import Estacoes from './Estacoes';
 import ObjetosEstacoes from './ObjetosEstacoes';
+import { useWeelListener } from '../useWeelListener';
 
 const MapaFrota = (props) => {
   const { trens, estacoesComPosicoes } = props;
@@ -17,81 +18,66 @@ const MapaFrota = (props) => {
   const {
     page,
     container,
+    content,
     gridMapa,
     gridFluxoFrota,
     sentidoFluxoContainer,
     linhaPontilhada,
   } = getStyles(maxWidthMapa);
 
-  const rendeObjetos = (sentido) => {
-    return (
-      <ObjetosEstacoes
-        estacoesComPosicoes={estacoesComPosicoes}
-        sentidoFluxo={sentido}
-      />
-    );
-  };
-
-  const handleWeel = (e) => {
-    if (mapaRef && mapaRef.current) {
-      const amountScroll = mapaRef.current.scrollLeft + e.deltaY / 2;
-      mapaRef.current.scrollTo({
-        top: 0,
-        left: amountScroll,
-        behaviour: 'smooth',
-      });
-    }
-  };
+  useWeelListener(mapaRef, 'horizontal', 0.5);
 
   return (
     <React.Fragment>
       <div style={page}>
-        <div style={container} onWheel={handleWeel}>
-          <StatusFrota />
-          <div style={gridMapa} ref={mapaRef}>
-            <div style={gridFluxoFrota}>
-              <FrotaFluxo
-                key={subindo}
-                status={vazios}
-                sentidoFluxo={subindo}
-                maxWidthMapa={maxWidthMapa}
-                estacoes={
-                  <Estacoes
-                    sentidoFluxo={subindo}
-                    estacoesComPosicoes={estacoesComPosicoes}
-                    trens={trens}
-                  />
-                }
-                objetosEstacoes={rendeObjetos(subindo)}
-              />
-            </div>
+        <div style={container}>
+          <div style={content}>
+            <StatusFrota />
+            <div style={gridMapa} ref={mapaRef}>
+              <div style={gridFluxoFrota}>
+                <FrotaFluxo
+                  key={subindo}
+                  status={vazios}
+                  sentidoFluxo={subindo}
+                  maxWidthMapa={maxWidthMapa}
+                  estacoesComPosicoes={estacoesComPosicoes}
+                  estacoes={
+                    <Estacoes
+                      sentidoFluxo={subindo}
+                      estacoesComPosicoes={estacoesComPosicoes}
+                      trens={trens}
+                    />
+                  }
+                />
+              </div>
 
-            <div
-              style={{
-                ...gridFluxoFrota,
-                ...gridFluxoFrota.fluxoDescendo,
-              }}
-            >
-              <FrotaFluxo
-                key={descendo}
-                status={carregados}
-                sentidoFluxo={descendo}
-                maxWidthMapa={maxWidthMapa}
-                estacoes={
-                  <Estacoes
-                    sentidoFluxo={descendo}
-                    estacoesComPosicoes={estacoesComPosicoes}
-                    trens={trens}
-                  />
-                }
-                objetosEstacoes={rendeObjetos(descendo)}
-              />
+              <div
+                style={{
+                  ...gridFluxoFrota,
+                  ...gridFluxoFrota.fluxoDescendo,
+                }}
+              >
+                <FrotaFluxo
+                  key={descendo}
+                  status={carregados}
+                  sentidoFluxo={descendo}
+                  maxWidthMapa={maxWidthMapa}
+                  estacoesComPosicoes={estacoesComPosicoes}
+                  estacoes={
+                    <Estacoes
+                      sentidoFluxo={descendo}
+                      estacoesComPosicoes={estacoesComPosicoes}
+                      trens={trens}
+                    />
+                  }
+                />
+              </div>
             </div>
-          </div>
-          <div style={sentidoFluxoContainer}>
-            <SentidoFluxo sentido={subindo} />
-            <hr style={linhaPontilhada} />
-            <SentidoFluxo sentido={descendo} />
+            <div style={sentidoFluxoContainer}>
+              <SentidoFluxo sentido={subindo} />
+              <hr style={linhaPontilhada} />
+              <SentidoFluxo sentido={descendo} />
+            </div>
           </div>
         </div>
       </div>
@@ -106,11 +92,19 @@ const getStyles = (maxWidthMapa) => {
       alignItems: 'center',
       justifyContent: 'center',
       width: '100vw',
-      overflowY: 'auto',
-      padding: '16px 0',
+      maxHeight: '100vh',
     },
 
     container: {
+      width: '80%',
+      height: '90%',
+      overflowY: 'auto',
+      padding: '16px 32px',
+      bottom: 0,
+      position: 'absolute',
+    },
+
+    content: {
       border: '1px solid #ccc',
       display: 'grid',
       gridTemplateColumns: '32px auto 16px',
@@ -118,14 +112,13 @@ const getStyles = (maxWidthMapa) => {
       alignItems: 'center',
       justifyContent: 'center',
       position: 'relative',
-      // backgroundColor: 'violet',
     },
 
     gridMapa: {
       display: 'grid',
       justifyItems: 'center',
       gridTemplateColumns: '1fr',
-      gridTemplateRows: '300px 300px',
+      gridTemplateRows: 'minmax(180px, auto) minmax(180px, auto)',
       overflow: 'auto',
       maxWidth: '80vw',
     },

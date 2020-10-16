@@ -14,6 +14,20 @@ export const trens = [
     ],
   },
   {
+    LocalidadeAtual: 'EYH',
+    Codigo: 'J782',
+    Vagoes: [
+      {
+        QuantidadeVagoes: 40,
+        Destino: 'ZOP',
+      },
+      {
+        QuantidadeVagoes: 40,
+        Destino: 'ZZB',
+      },
+    ],
+  },
+  {
     LocalidadeAtual: 'EPO',
     Codigo: 'J782',
     Vagoes: [
@@ -51,6 +65,16 @@ export const trens = [
       },
     ],
   },
+  {
+    LocalidadeAtual: 'ZCB',
+    Codigo: 'J782',
+    Vagoes: [
+      {
+        QuantidadeVagoes: 40,
+        Destino: 'ZOP',
+      },
+    ],
+  },
 ];
 
 export const vagoes = [
@@ -58,32 +82,50 @@ export const vagoes = [
     LocalidadeAtual: 'EPO',
     Situacao: 'Carregado',
     TempoPermanencia: 3,
-    QuantidadeVagoes: 53,
+    QuantidadeVagoes: 51,
   },
   {
     LocalidadeAtual: 'EGN',
     Situacao: 'Carregado',
     TempoPermanencia: 3,
-    QuantidadeVagoes: 53,
+    QuantidadeVagoes: 52,
   },
+  // {
+  //   LocalidadeAtual: 'EYG',
+  //   Situacao: 'Carregado',
+  //   TempoPermanencia: 3,
+  //   QuantidadeVagoes: 53,
+  // },
+  // {
+  //   LocalidadeAtual: 'EVV',
+  //   Situacao: 'Carregado',
+  //   TempoPermanencia: 3,
+  //   QuantidadeVagoes: 54,
+  // },
+  // {
+  //   LocalidadeAtual: 'EGN',
+  //   Situacao: 'Carregado',
+  //   TempoPermanencia: 3,
+  //   QuantidadeVagoes: 55,
+  // },
+  // {
+  //   LocalidadeAtual: 'EYH',
+  //   Situacao: 'Carregado',
+  //   TempoPermanencia: 3,
+  //   QuantidadeVagoes: 56,
+  // },
+  // {
+  //   LocalidadeAtual: 'EYH',
+  //   Situacao: 'Carregado',
+  //   TempoPermanencia: 3,
+  //   QuantidadeVagoes: 57,
+  // },
   {
-    LocalidadeAtual: 'EYG',
+    LocalidadeAtual: 'EBJ',
     Situacao: 'Carregado',
     TempoPermanencia: 3,
-    QuantidadeVagoes: 53,
+    QuantidadeVagoes: 57,
   },
-  // {
-  //   LocalidadeAtual: 'EYG',
-  //   Situacao: 'Carregado',
-  //   TempoPermanencia: 3,
-  //   QuantidadeVagoes: 53,
-  // },
-  // {
-  //   LocalidadeAtual: 'EYG',
-  //   Situacao: 'Carregado',
-  //   TempoPermanencia: 3,
-  //   QuantidadeVagoes: 53,
-  // },
 ];
 
 export const mapaEstacoesGraoDictionaty = {

@@ -3,7 +3,7 @@ import { MAX_HEIGHT_OBJ, TREM_WIDTH } from '../utils';
 import './Mapa.css';
 
 const Trem = (props) => {
-  const { subindo, trem } = props;
+  const { subindo, trem, plotarObjetoNoMapa } = props;
   const { tremContent } = getStyles(subindo);
   return (
     <div
