@@ -7,7 +7,7 @@ export const TREM_WIDTH = 56;
 export const VAGAO_ACOPLADO_WIDTH = 72;
 export const VAGAO_DESACOPLADO_WIDTH = 34;
 export const TAMANHO_PONTO_ESTACAO = 8;
-const DEFAULT_POSITION_Y = 120;
+const DEFAULT_POSITION_Y = 140;
 
 export const getPositionX = (idx = 0) => {
   return idx > 0 ? idx * DISTANCIA_ENTRE_ESTACOES : 0;
@@ -58,7 +58,7 @@ const buscaEstacaoObjetoEntreMarcos = (mapaEstacoes, objeto) => {
   return null;
 };
 
-export const getTremNaEstacao = (objeto, mapaComPosicoes, tipo = 'trem') => {
+export const getObjetoNaEstacao = (objeto, mapaComPosicoes, tipo = 'trem') => {
   const isTrem = tipo === 'trem';
   const estacaoTrem = mapaComPosicoes.find(
     (estacao) => estacao.estacaoPatio === objeto.LocalidadeAtual
@@ -92,37 +92,36 @@ export const getEstacoesComPosicoes = (estacoesPatios) => {
   });
 };
 
-export const atualizaPositionYObjetos = (
-  objetoAtual,
+export const atualizaPosicaoYObjetos = (
+  objetoRenderizar,
   indexObjetoAtual,
-  objetos
+  objetos,
+  alturaMinimaPlotarObjetos = 0
 ) => {
-
   const estacoesObjetoOcupa = Math.ceil(
-    objetoAtual.width / DISTANCIA_ENTRE_ESTACOES
+    objetoRenderizar.width / DISTANCIA_ENTRE_ESTACOES
   );
 
-  const proximosAfetados = Math.ceil(estacoesObjetoOcupa / 2);
-  let contadorProximos = 0;
+  const anterioresAfetados = Math.ceil(estacoesObjetoOcupa / 2);
+  let indexObjetoAtualizar = indexObjetoAtual - anterioresAfetados;
+  const larguraObjetoAtual = objetoRenderizar.width;
+  const inicioObjetoAtual = objetoRenderizar.positionX - larguraObjetoAtual / 2;
 
-  while (contadorProximos <= proximosAfetados) {
-    let corrente = objetos[indexObjetoAtual];
-    let proximo = objetos[indexObjetoAtual + 1];
-    if (proximo) {
-      const diffWidth = proximo.positionX - corrente.positionX;
-      if (diffWidth <= corrente.width) {
-        proximo.positionY = corrente.positionY + MAX_HEIGHT_OBJ + 10;
+  while (indexObjetoAtualizar < indexObjetoAtual) {
+    const objetoCorrente = objetos[indexObjetoAtualizar];
+    if (objetoCorrente) {
+      const fimObjetoCorrente =
+        objetoCorrente.positionX + objetoCorrente.width / 2;
+
+      if (inicioObjetoAtual <= fimObjetoCorrente) {
+        const alturaMinima =
+          indexObjetoAtual === 0 ? alturaMinimaPlotarObjetos : 0;
+        objetoRenderizar.positionY =
+          alturaMinima + objetoCorrente.positionY + MAX_HEIGHT_OBJ + 10;
       }
     }
-    contadorProximos++;
+    indexObjetoAtualizar++;
   }
-};
-
-export const calcPositionYObjetos = (objetos) => {
-  return objetos.map((objeto, idx, self) => {
-    atualizaPositionYObjetos(objeto, idx, self);
-    return objeto;
-  });
 };
 
 export const getMaximoTamanhoMapa = (estacoesComPosicoes) => {
@@ -135,4 +134,24 @@ export const getMaximoTamanhoMapa = (estacoesComPosicoes) => {
 
 export const isFluxoSubindo = (sentido) => {
   return sentido === FLUXOS_FROTA.subindo;
+};
+
+const ordenaObjetosPorKey = (objetosPlotar, key) => {
+  return objetosPlotar.sort((a, b) => {
+    if (a[key] > b[key]) {
+      return 1;
+    } else if (a[key] < b[key]) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+};
+
+export const ordenaObjetosPosicaoY = (objetosPlotar) => {
+  return ordenaObjetosPorKey(objetosPlotar, 'positionY');
+};
+
+export const ordenaObjetosLocalidade = (objetosPlotar) => {
+  return ordenaObjetosPorKey(objetosPlotar, 'LocalidadeAtual');
 };

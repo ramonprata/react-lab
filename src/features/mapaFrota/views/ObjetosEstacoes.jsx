@@ -1,8 +1,11 @@
 import React from 'react';
 import {
   isFluxoSubindo,
-  atualizaPositionYObjetos,
-  getTremNaEstacao,
+  atualizaPosicaoYObjetos,
+  getObjetoNaEstacao,
+  MAX_HEIGHT_OBJ,
+  ordenaObjetosPosicaoY,
+  ordenaObjetosLocalidade,
 } from '../utils';
 import { trens, vagoes } from '../dados.mock';
 import Trem from './Trem';
@@ -14,12 +17,12 @@ const ObjetosEstacoes = (props) => {
   const { sentidoFluxo, estacoesComPosicoes, plotarObjetoNoMapa } = props;
   const fluxoSubindo = isFluxoSubindo(sentidoFluxo);
 
-  const trensRender = trens.map((trem) => {
-    return getTremNaEstacao(trem, estacoesComPosicoes);
+  const trensRender = ordenaObjetosLocalidade(trens).map((trem) => {
+    return getObjetoNaEstacao(trem, estacoesComPosicoes);
   });
 
-  const vagoesRender = vagoes.map((vagao) => {
-    return getTremNaEstacao(vagao, estacoesComPosicoes, 'vagao');
+  const vagoesRender = ordenaObjetosLocalidade(vagoes).map((vagao) => {
+    return getObjetoNaEstacao(vagao, estacoesComPosicoes, 'vagao');
   });
 
   const renderTrem = (trem) => {
@@ -43,10 +46,26 @@ const ObjetosEstacoes = (props) => {
     return <Vagao subindo={fluxoSubindo} acoplado={false} vagao={vagao} />;
   };
 
-  return [...vagoesRender, ...trensRender].map((tremVagao, idx, self) => {
-    const renderizaTrem = tremVagao.tipo === 'trem';
-    atualizaPositionYObjetos(tremVagao, idx, self);
+  vagoesRender.forEach((tremVagao, idx, self) =>
+    atualizaPosicaoYObjetos(tremVagao, idx, self)
+  );
+  const vagoesOrdenadosPosicaoY = ordenaObjetosPosicaoY(vagoesRender);
+  const trensOrdenadosPosicaoY = ordenaObjetosPosicaoY(trensRender);
 
+  const alturaMinimaPlotarObjetos =
+    vagoesOrdenadosPosicaoY[vagoesOrdenadosPosicaoY.length - 1].positionY;
+
+  const todosObjetosRender = [
+    ...vagoesOrdenadosPosicaoY,
+    ...trensOrdenadosPosicaoY,
+  ];
+
+  todosObjetosRender.forEach((tremVagao, idx, self) =>
+    atualizaPosicaoYObjetos(tremVagao, idx, self, alturaMinimaPlotarObjetos)
+  );
+
+  return [...todosObjetosRender].map((tremVagao, idx) => {
+    const renderizaTrem = tremVagao.tipo === 'trem';
     return (
       <React.Fragment key={`objeto-estacao-${idx}`}>
         <ObjetoEstacaoWrapper

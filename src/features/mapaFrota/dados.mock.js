@@ -1,7 +1,7 @@
 export const trens = [
   {
     LocalidadeAtual: 'EYH',
-    Codigo: 'J782',
+    Codigo: 'J781',
     Vagoes: [
       {
         QuantidadeVagoes: 40,
@@ -29,7 +29,7 @@ export const trens = [
   },
   {
     LocalidadeAtual: 'EPO',
-    Codigo: 'J782',
+    Codigo: 'J783',
     Vagoes: [
       {
         QuantidadeVagoes: 40,
@@ -43,7 +43,7 @@ export const trens = [
   },
   {
     LocalidadeAtual: 'EYG',
-    Codigo: 'J782',
+    Codigo: 'J784',
     Vagoes: [
       {
         QuantidadeVagoes: 40,
@@ -57,7 +57,7 @@ export const trens = [
   },
   {
     LocalidadeAtual: 'ZCB',
-    Codigo: 'J782',
+    Codigo: 'J785',
     Vagoes: [
       {
         QuantidadeVagoes: 40,
@@ -66,8 +66,8 @@ export const trens = [
     ],
   },
   {
-    LocalidadeAtual: 'ZCB',
-    Codigo: 'J782',
+    LocalidadeAtual: 'EYH',
+    Codigo: 'J786',
     Vagoes: [
       {
         QuantidadeVagoes: 40,
@@ -90,41 +90,53 @@ export const vagoes = [
     TempoPermanencia: 3,
     QuantidadeVagoes: 52,
   },
-  // {
-  //   LocalidadeAtual: 'EYG',
-  //   Situacao: 'Carregado',
-  //   TempoPermanencia: 3,
-  //   QuantidadeVagoes: 53,
-  // },
-  // {
-  //   LocalidadeAtual: 'EVV',
-  //   Situacao: 'Carregado',
-  //   TempoPermanencia: 3,
-  //   QuantidadeVagoes: 54,
-  // },
-  // {
-  //   LocalidadeAtual: 'EGN',
-  //   Situacao: 'Carregado',
-  //   TempoPermanencia: 3,
-  //   QuantidadeVagoes: 55,
-  // },
-  // {
-  //   LocalidadeAtual: 'EYH',
-  //   Situacao: 'Carregado',
-  //   TempoPermanencia: 3,
-  //   QuantidadeVagoes: 56,
-  // },
-  // {
-  //   LocalidadeAtual: 'EYH',
-  //   Situacao: 'Carregado',
-  //   TempoPermanencia: 3,
-  //   QuantidadeVagoes: 57,
-  // },
+  {
+    LocalidadeAtual: 'EYG',
+    Situacao: 'Carregado',
+    TempoPermanencia: 3,
+    QuantidadeVagoes: 53,
+  },
+  {
+    LocalidadeAtual: 'EVV',
+    Situacao: 'Carregado',
+    TempoPermanencia: 3,
+    QuantidadeVagoes: 54,
+  },
+  {
+    LocalidadeAtual: 'EGN',
+    Situacao: 'Carregado',
+    TempoPermanencia: 3,
+    QuantidadeVagoes: 55,
+  },
+  {
+    LocalidadeAtual: 'EYH',
+    Situacao: 'Carregado',
+    TempoPermanencia: 3,
+    QuantidadeVagoes: 56,
+  },
+  {
+    LocalidadeAtual: 'EYH',
+    Situacao: 'Carregado',
+    TempoPermanencia: 3,
+    QuantidadeVagoes: 57,
+  },
   {
     LocalidadeAtual: 'EBJ',
     Situacao: 'Carregado',
     TempoPermanencia: 3,
-    QuantidadeVagoes: 57,
+    QuantidadeVagoes: 58,
+  },
+  {
+    LocalidadeAtual: 'ZZB',
+    Situacao: 'Carregado',
+    TempoPermanencia: 3,
+    QuantidadeVagoes: 59,
+  },
+  {
+    LocalidadeAtual: 'ZDW',
+    Situacao: 'Carregado',
+    TempoPermanencia: 3,
+    QuantidadeVagoes: 60,
   },
 ];
 
