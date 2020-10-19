@@ -1,21 +1,9 @@
 export const trens = [
   {
     LocalidadeAtual: 'EYH',
-    Codigo: 'J781',
-    Vagoes: [
-      {
-        QuantidadeVagoes: 40,
-        Destino: 'ZOP',
-      },
-      {
-        QuantidadeVagoes: 40,
-        Destino: 'ZZB',
-      },
-    ],
-  },
-  {
-    LocalidadeAtual: 'EYH',
     Codigo: 'J782',
+    Carregado: true,
+    Subindo: true,
     Vagoes: [
       {
         QuantidadeVagoes: 40,
@@ -28,8 +16,26 @@ export const trens = [
     ],
   },
   {
-    LocalidadeAtual: 'EPO',
+    LocalidadeAtual: 'EPY',
+    Codigo: 'J782',
+    Carregado: true,
+    Subindo: true,
+    Vagoes: [
+      {
+        QuantidadeVagoes: 40,
+        Destino: 'ZOP',
+      },
+      {
+        QuantidadeVagoes: 40,
+        Destino: 'ZZB',
+      },
+    ],
+  },
+  {
+    LocalidadeAtual: 'EPY',
     Codigo: 'J783',
+    Carregado: true,
+    Subindo: true,
     Vagoes: [
       {
         QuantidadeVagoes: 40,
@@ -43,7 +49,9 @@ export const trens = [
   },
   {
     LocalidadeAtual: 'EYG',
-    Codigo: 'J784',
+    Codigo: 'J782',
+    Carregado: true,
+    Subindo: false,
     Vagoes: [
       {
         QuantidadeVagoes: 40,
@@ -57,17 +65,9 @@ export const trens = [
   },
   {
     LocalidadeAtual: 'ZCB',
-    Codigo: 'J785',
-    Vagoes: [
-      {
-        QuantidadeVagoes: 40,
-        Destino: 'ZOP',
-      },
-    ],
-  },
-  {
-    LocalidadeAtual: 'EYH',
-    Codigo: 'J786',
+    Codigo: 'J782',
+    Carregado: true,
+    Subindo: true,
     Vagoes: [
       {
         QuantidadeVagoes: 40,
@@ -79,360 +79,93 @@ export const trens = [
 
 export const vagoes = [
   {
-    LocalidadeAtual: 'EPO',
-    Situacao: 'Carregado',
-    TempoPermanencia: 3,
-    QuantidadeVagoes: 51,
-  },
-  {
-    LocalidadeAtual: 'EGN',
-    Situacao: 'Carregado',
-    TempoPermanencia: 3,
-    QuantidadeVagoes: 52,
-  },
-  {
     LocalidadeAtual: 'EYG',
-    Situacao: 'Carregado',
-    TempoPermanencia: 3,
-    QuantidadeVagoes: 53,
+    Carregado: true,
+    TempoPermanencia: 1,
+    Destino: 'AAA',
+    QuantidadeVagoes: 51,
+    VagoesDisponiveis: 51,
+    VagoesRetidos: 2,
   },
   {
     LocalidadeAtual: 'EVV',
-    Situacao: 'Carregado',
-    TempoPermanencia: 3,
-    QuantidadeVagoes: 54,
+    Carregado: true,
+    TempoPermanencia: 2,
+    Destino: 'AAA',
+    QuantidadeVagoes: 52,
+    VagoesDisponiveis: 51,
+    VagoesRetidos: 2,
   },
   {
     LocalidadeAtual: 'EGN',
-    Situacao: 'Carregado',
+    Carregado: true,
     TempoPermanencia: 3,
-    QuantidadeVagoes: 55,
+    Destino: 'BBB',
+    QuantidadeVagoes: 53,
+    VagoesDisponiveis: 51,
+    VagoesRetidos: 2,
   },
   {
-    LocalidadeAtual: 'EYH',
-    Situacao: 'Carregado',
-    TempoPermanencia: 3,
-    QuantidadeVagoes: 56,
-  },
-  {
-    LocalidadeAtual: 'EYH',
-    Situacao: 'Carregado',
-    TempoPermanencia: 3,
-    QuantidadeVagoes: 57,
+    LocalidadeAtual: 'EYG',
+    Carregado: true,
+    TempoPermanencia: 4,
+    Destino: 'BBB',
+    QuantidadeVagoes: 54,
+    VagoesDisponiveis: 51,
+    VagoesRetidos: 2,
   },
   {
     LocalidadeAtual: 'EBJ',
-    Situacao: 'Carregado',
-    TempoPermanencia: 3,
-    QuantidadeVagoes: 58,
+    Carregado: false,
+    TempoPermanencia: 1,
+    Destino: null,
+    QuantidadeVagoes: 55,
+    VagoesDisponiveis: 51,
+    VagoesRetidos: 2,
   },
   {
-    LocalidadeAtual: 'ZZB',
-    Situacao: 'Carregado',
+    LocalidadeAtual: 'ZKJ',
+    Carregado: true,
     TempoPermanencia: 3,
+    Destino: null,
+    QuantidadeVagoes: 56,
+    VagoesDisponiveis: 51,
+    VagoesRetidos: 2,
+  },
+  {
+    LocalidadeAtual: 'ZMN',
+    Carregado: false,
+    TempoPermanencia: 4,
+    Destino: null,
+    QuantidadeVagoes: 57,
+    VagoesDisponiveis: 51,
+    VagoesRetidos: 2,
+  },
+  {
+    LocalidadeAtual: 'ZMN',
+    Carregado: false,
+    TempoPermanencia: 4,
+    Destino: null,
+    QuantidadeVagoes: 58,
+    VagoesDisponiveis: 51,
+    VagoesRetidos: 2,
+  },
+  {
+    LocalidadeAtual: 'ZKJ',
+    Carregado: false,
+    TempoPermanencia: 2,
+    Destino: null,
     QuantidadeVagoes: 59,
+    VagoesDisponiveis: 51,
+    VagoesRetidos: 2,
   },
   {
     LocalidadeAtual: 'ZDW',
-    Situacao: 'Carregado',
+    Carregado: false,
     TempoPermanencia: 3,
+    Destino: null,
     QuantidadeVagoes: 60,
+    VagoesDisponiveis: 51,
+    VagoesRetidos: 2,
   },
 ];
-
-export const mapaEstacoesGraoDictionaty = {
-  EOO: {
-    estacaoPatio: 'EOO',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', '', '', ''],
-  },
-  EPY: {
-    estacaoPatio: 'EPY',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', ''],
-  },
-  EBZ: {
-    estacaoPatio: 'EBZ',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', ''],
-  },
-  EBU: {
-    estacaoPatio: 'EBU',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', ''],
-  },
-  EPO: {
-    estacaoPatio: 'EPO',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['EVV', 'EGN', 'EYG', 'EYH'],
-  },
-  EBJ: {
-    estacaoPatio: 'EBJ',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', ''],
-  },
-  // EAU: {
-  //   estacaoPatio: 'EAU',
-  //   marco: true,
-  //   carregamento: false,
-  //   descarregamento: false,
-  //   proximos: ['ZPR', 'ZHF', 'ZUL', 'ZHU', 'ZYE'],
-  // }
-  ZZB: {
-    estacaoPatio: 'ZZB',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['ZNI', 'ZDW', 'ZKJ', 'ZMN'],
-  },
-  ZUB: {
-    estacaoPatio: 'ZUB',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: [
-      'ZOQ',
-      'ZVF',
-      'ZWA',
-      'ZBC',
-      'ZYW',
-      'ZGU',
-      'ZG2',
-      'ZPE',
-      'ZHB',
-      'ZKR',
-      'ZJN',
-    ],
-  },
-  ZRP: {
-    estacaoPatio: 'ZRP',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: [
-      'ZEG',
-      'ZEK',
-      'ZCE',
-      'ZHI',
-      'ZHM',
-      'ZTD',
-      'ZCB',
-      'ZLB',
-      'ZAI',
-      'ZMQ',
-      'ZEA',
-      'ZMG',
-      'ZMM',
-      'ZXD',
-      'ZJJ',
-      'ZZZ',
-      'ZZQ',
-    ],
-  },
-  ZOP: {
-    estacaoPatio: 'ZOP',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', ''],
-  },
-  ZBL: {
-    estacaoPatio: 'ZBL',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: [
-      'ZQB',
-      'ZDS',
-      'ZVK',
-      'ZIC',
-      'ZXI',
-      'ZST',
-      'ZYU',
-      'ZFY',
-      'ZXP',
-      'ZDY',
-      'ZDI',
-      'ZER',
-      'ZCX',
-      'ZXY',
-      'ZPS',
-    ],
-  },
-  ZKE: {
-    estacaoPatio: 'ZKE',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: [
-      'ZWW',
-      'ZKW',
-      'ZLU',
-      'ZWI',
-      'ZYQ',
-      'ZEM',
-      'ZMS',
-      'ZEJ',
-      'ZRB',
-      'ZEV',
-      'ZEZ',
-      'ZXW',
-      '95',
-      'ZGP',
-      'ZWU',
-    ],
-  },
-  ZPT: {
-    estacaoPatio: 'ZPT',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', ''],
-  },
-  ZGM: {
-    estacaoPatio: 'ZGM',
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', ''],
-  },
-  ZPG: {
-    estacaoPatio: 'ZPG',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', ''],
-  },
-  ISN: {
-    estacaoPatio: 'ISN',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', ''],
-  },
-  IAA: {
-    estacaoPatio: 'IAA',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', ''],
-  },
-  ICZ: {
-    estacaoPatio: 'ICZ',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', ''],
-  },
-  IUF: {
-    estacaoPatio: 'IUF',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', ''],
-  },
-  IFA: {
-    estacaoPatio: 'IFA',
-    marco: true,
-    carregamento: false,
-    descarregamento: false,
-    proximos: ['', ''],
-  },
-};
-
-// {​​​​​​​​
-// Trens:
-//    [{​​​​​​​​
-// Codigo: 'J782',
-// Destino: {​​​​​​​​
-// QuantidadeVagoes: 40
-// Local: ZOP
-// }​​​​​​​​,
-
-// Destino: {​​​​​​​​
-// QuantidadeVagoes: 30
-// Local: ZZB
-// }​​​​​​​​,
-
-// Situacao: 'Carregado'
-// LocalidadeAtual: 'ZBL' (pode ser patio ou Estacao)
-// }​​​​​​​​,
-
-// ]
-// Vagoes: [
-// {​​​​​​​​
-//  LocalidadeAtual: 'PAT1',
-//  Situacao: 'Carregado'
-//  TempoPermanencia: 3 (estagios)
-//  Vagoes: {​​​​​​​​
-//   QuantidadeTotal: 53,
-
-//   Destinos: [
-
-// {​​​​​​​​
-
-// QuantidadeVagoesRetidos: 23,
-// QuantidadeVagoesNaoRetidos: 10,
-
-// Local: ZZL,
-//  }​​​​​​​​,
-
-// {​​​​​​​​
-
-// QuantidadeVagoesRetidos: 30,
-// QuantidadeVagoesNaoRetidos: 15
-
-// Local: ZBL
-//}​​​​​​​​
-
-// ]
-
-// }​​​​​​​​
-
-// }​​​​​​​​,
-
-// {​​​​​​​​
-//  LocalidadeAtual: 'PAT2',
-//  Situacao: 'Descarregado'
-//  TempoPermanencia: 3 (estagios)
-//  Vagoes: {​​​​​​​​
-//   QuantidadeTotal: 33,
-
-//   QuantidadeVagoesRetidos: 23,
-//   QuantidadeVagoesNaoRetidos: 10 }​​​​​​​​,
-
-//}​​​​​​​​
-
-// ]
-
-// }​​​​​​​​
-
-// }​​​​​​​​,
-
-// ],
-// Ativos: {​​​​​​​​
-//     Total: 2500,
-//     Disponivel: 1200,
-//     Retido: 300,
-//     EmTrem: {​​​​​​​​
-//    SubindoVazio: 100,
-//    DescendoCarregado: 250
-//     }​​​​​​​​,
-//     Desanexados: {​​​​​​​​
-//   Carregados: 260,
-//   Vazios: 300
-//     }​​​​​​​​,
-//     Percentuais:
-//     DataAtualizacaoDado: '2020-10-02 15:30:00'
-// }​​​​​​​​

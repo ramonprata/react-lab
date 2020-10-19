@@ -1,23 +1,22 @@
 import React from 'react';
 import MapaFrota from './MapaFrota';
-import { mapaEstacoesGraoDictionaty } from '../dados.mock';
-import { getEstacoesComPosicoes } from '../utils';
+import { getEstacoes } from '../utils';
+import { trens, vagoes } from '../dados.mock';
 
-const MapaContainer = () => {
-  let estacoesComProximos = [];
+const MapaContainer = (props) => {
+  const { mapaSelecionado } = props;
 
-  Object.values(mapaEstacoesGraoDictionaty).forEach((estacao) => {
-    const proximosPontos = estacao.proximos
-      ? estacao.proximos.slice(0, Math.ceil(0.7 * estacao.proximos.length))
-      : [];
-    estacoesComProximos.push(estacao, ...proximosPontos);
-  });
+  return (
+    <MapaFrota
+      estacoesComPosicoes={getEstacoes(mapaSelecionado)}
+      trens={trens}
+      vagoes={vagoes}
+    />
+  );
+};
 
-  const trens = [{ Patio: 'ZBL' }, { Patio: 'EYH' }];
-
-  const estacoesComPosicoes = getEstacoesComPosicoes(estacoesComProximos);
-
-  return <MapaFrota estacoesComPosicoes={estacoesComPosicoes} trens={trens} />;
+MapaContainer.defaultProps = {
+  mapaSelecionado: 'grao',
 };
 
 export default MapaContainer;

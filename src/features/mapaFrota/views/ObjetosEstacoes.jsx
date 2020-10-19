@@ -3,47 +3,77 @@ import {
   isFluxoSubindo,
   atualizaPosicaoYObjetos,
   getObjetoNaEstacao,
-  MAX_HEIGHT_OBJ,
   ordenaObjetosPosicaoY,
   ordenaObjetosLocalidade,
+  TIPOS_OBJETO_PLOTAR,
 } from '../utils';
-import { trens, vagoes } from '../dados.mock';
 import Trem from './Trem';
 import Vagao from './Vagao';
 import ObjetoEstacaoWrapper from './ObjetoEstacaoWrapper';
 import LinhaAncora from './LinhaAncora';
 
 const ObjetosEstacoes = (props) => {
-  const { sentidoFluxo, estacoesComPosicoes, plotarObjetoNoMapa } = props;
+  const {
+    sentidoFluxo,
+    estacoesComPosicoes,
+    plotarObjetoNoMapa,
+    trens,
+    vagoes,
+  } = props;
   const fluxoSubindo = isFluxoSubindo(sentidoFluxo);
 
   const trensRender = ordenaObjetosLocalidade(trens).map((trem) => {
     return getObjetoNaEstacao(trem, estacoesComPosicoes);
   });
 
-  const vagoesRender = ordenaObjetosLocalidade(vagoes).map((vagao) => {
-    return getObjetoNaEstacao(vagao, estacoesComPosicoes, 'vagao');
+  const { vagao, trem } = TIPOS_OBJETO_PLOTAR;
+  const vagoesRender = ordenaObjetosLocalidade(vagoes).map((objetoVagao) => {
+    return getObjetoNaEstacao(objetoVagao, estacoesComPosicoes, vagao);
   });
+
+  const onClick = (objetoNaEstacao) => {
+    const { tipo } = objetoNaEstacao;
+    if (tipo) {
+      if (tipo === vagao) {
+        console.log('vagao :>> ', objetoNaEstacao);
+      } else if (tipo === 'trem') {
+        console.log('trem :>> ', objetoNaEstacao);
+      }
+    }
+    return;
+  };
 
   const renderTrem = (trem) => {
     return (
       <React.Fragment>
-        <Trem subindo={fluxoSubindo} trem={trem} />
+        <Trem subindo={fluxoSubindo} trem={trem} onClick={onClick} />
         {trem.Vagoes &&
-          trem.Vagoes.map((vagao, idx) => (
-            <Vagao
-              key={`vagao-${idx}`}
-              subindo={fluxoSubindo}
-              acoplado={true}
-              vagao={vagao}
-            />
-          ))}
+          trem.Vagoes.map((vagao, idx) => {
+            const { Vagoes, ...tremInfo } = trem;
+            return (
+              <Vagao
+                key={`vagao-${idx}`}
+                subindo={fluxoSubindo}
+                acoplado={true}
+                vagao={{ ...vagao, tipo: vagao, posicaoNoTrem: idx }}
+                tremInfo={tremInfo}
+                onClick={onClick}
+              />
+            );
+          })}
       </React.Fragment>
     );
   };
 
   const renderVagao = (vagao) => {
-    return <Vagao subindo={fluxoSubindo} acoplado={false} vagao={vagao} />;
+    return (
+      <Vagao
+        subindo={fluxoSubindo}
+        acoplado={false}
+        vagao={vagao}
+        onClick={onClick}
+      />
+    );
   };
 
   vagoesRender.forEach((tremVagao, idx, self) =>
@@ -53,7 +83,7 @@ const ObjetosEstacoes = (props) => {
   const trensOrdenadosPosicaoY = ordenaObjetosPosicaoY(trensRender);
 
   const alturaMinimaPlotarObjetos =
-    vagoesOrdenadosPosicaoY[vagoesOrdenadosPosicaoY.length - 1].positionY;
+    vagoesOrdenadosPosicaoY[vagoesOrdenadosPosicaoY.length - 1].posicaoY;
 
   const todosObjetosRender = [
     ...vagoesOrdenadosPosicaoY,

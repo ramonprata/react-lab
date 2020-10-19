@@ -4,14 +4,13 @@ import { getMaximoTamanhoMapa, STATUS_FROTA, FLUXOS_FROTA } from '../utils';
 import StatusFrota from './StatusFrota';
 import SentidoFluxo from './SentidoFluxo';
 import Estacoes from './Estacoes';
-import ObjetosEstacoes from './ObjetosEstacoes';
 import { useWeelListener } from '../useWeelListener';
 
 const MapaFrota = (props) => {
-  const { trens, estacoesComPosicoes } = props;
+  const { trens, vagoes, estacoesComPosicoes } = props;
   const maxWidthMapa = getMaximoTamanhoMapa(estacoesComPosicoes);
   const mapaRef = useRef(null);
-
+  useWeelListener(mapaRef, 'horizontal', 0.5);
   const { subindo, descendo } = FLUXOS_FROTA;
   const { vazios, carregados } = STATUS_FROTA;
 
@@ -25,7 +24,15 @@ const MapaFrota = (props) => {
     linhaPontilhada,
   } = getStyles(maxWidthMapa);
 
-  useWeelListener(mapaRef, 'horizontal', 0.5);
+  const objetosFluxoSubindo = {
+    trens: trens.filter((trem) => trem.Subindo),
+    vagoes: vagoes.filter((vagao) => !vagao.Carregado),
+  };
+
+  const objetosFluxoDescendo = {
+    trens: trens.filter((trem) => !trem.Subindo),
+    vagoes: vagoes.filter((vagao) => vagao.Carregado),
+  };
 
   return (
     <React.Fragment>
@@ -39,13 +46,13 @@ const MapaFrota = (props) => {
                   key={subindo}
                   status={vazios}
                   sentidoFluxo={subindo}
+                  objetosRender={objetosFluxoSubindo}
                   maxWidthMapa={maxWidthMapa}
                   estacoesComPosicoes={estacoesComPosicoes}
                   estacoes={
                     <Estacoes
                       sentidoFluxo={subindo}
                       estacoesComPosicoes={estacoesComPosicoes}
-                      trens={trens}
                     />
                   }
                 />
@@ -61,6 +68,7 @@ const MapaFrota = (props) => {
                   key={descendo}
                   status={carregados}
                   sentidoFluxo={descendo}
+                  objetosRender={objetosFluxoDescendo}
                   maxWidthMapa={maxWidthMapa}
                   estacoesComPosicoes={estacoesComPosicoes}
                   estacoes={
@@ -72,11 +80,11 @@ const MapaFrota = (props) => {
                   }
                 />
               </div>
-            </div>
-            <div style={sentidoFluxoContainer}>
-              <SentidoFluxo sentido={subindo} />
-              <hr style={linhaPontilhada} />
-              <SentidoFluxo sentido={descendo} />
+              <div style={sentidoFluxoContainer}>
+                <SentidoFluxo sentido={subindo} />
+                <hr style={linhaPontilhada} />
+                <SentidoFluxo sentido={descendo} />
+              </div>
             </div>
           </div>
         </div>
@@ -85,7 +93,7 @@ const MapaFrota = (props) => {
   );
 };
 
-const getStyles = (maxWidthMapa) => {
+const getStyles = (maxWidthMapa, mapaRef) => {
   return {
     page: {
       display: 'flex',
@@ -125,10 +133,8 @@ const getStyles = (maxWidthMapa) => {
 
     gridFluxoFrota: {
       display: 'grid',
-      gridTemplateColumns: '1fr',
+      gridTemplateColumns: 'minmax(80vw, auto)',
       gridTemplateRows: 'auto',
-      minWidth: maxWidthMapa,
-      position: 'relative',
     },
 
     sentidoFluxoContainer: {
@@ -137,6 +143,8 @@ const getStyles = (maxWidthMapa) => {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'flex-end',
+      height: 60,
+      right: 0,
     },
     linhaPontilhada: {
       border: 'none',

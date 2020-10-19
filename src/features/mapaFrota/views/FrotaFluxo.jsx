@@ -1,11 +1,17 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { isFluxoSubindo } from '../utils';
+import { isFluxoSubindo, ordenaObjetosPorKey } from '../utils';
 import ObjetosEstacoes from './ObjetosEstacoes';
 
 const FrotaFluxo = (props) => {
   const containerObjetosRef = useRef(null);
   const [mapHeight, setHeight] = useState('auto');
-  const { sentidoFluxo, maxWidthMapa, estacoes, estacoesComPosicoes } = props;
+  const {
+    sentidoFluxo,
+    maxWidthMapa,
+    estacoes,
+    estacoesComPosicoes,
+    objetosRender,
+  } = props;
   const { mapa, linhaPontilhada, containerEstacoes } = getStyles(maxWidthMapa);
   const fluxoSubindo = isFluxoSubindo(sentidoFluxo);
   const posicaoEstacoes = {
@@ -15,7 +21,7 @@ const FrotaFluxo = (props) => {
 
   useEffect(() => {
     if (Boolean(containerObjetosRef.current)) {
-      setHeight(containerObjetosRef.current.offsetHeight * 1.5);
+      setHeight(containerObjetosRef.current.offsetHeight * 1.6);
     }
   }, [containerObjetosRef]);
 
@@ -27,6 +33,8 @@ const FrotaFluxo = (props) => {
         estacoesComPosicoes={estacoesComPosicoes}
         sentidoFluxo={sentidoFluxo}
         plotarObjetoNoMapa={plotarObjetoNoMapa}
+        trens={objetosRender.trens}
+        vagoes={objetosRender.vagoes}
       />
     );
   };

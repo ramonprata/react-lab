@@ -13,15 +13,17 @@ const ObjetoEstacaoWrapper = (props) => {
 };
 
 const getStyles = (tremVagao, fluxoSubindo, plotarObjetoNoMapa) => {
+  const posicaoX = tremVagao.posicaoX - tremVagao.width / 2;
+
   return {
     objetoContainer: {
       height: MAX_HEIGHT_OBJ,
       zIndex: 1,
       display: 'flex',
       position: plotarObjetoNoMapa ? 'absolute' : 'relative',
-      left: tremVagao.positionX - tremVagao.width / 2,
-      bottom: !fluxoSubindo ? tremVagao.positionY : 'unset',
-      top: fluxoSubindo ? tremVagao.positionY : 'unset',
+      left: posicaoX > 0 ? posicaoX : 0,
+      bottom: !fluxoSubindo ? tremVagao.posicaoY : 'unset',
+      top: fluxoSubindo ? tremVagao.posicaoY : 'unset',
       flexDirection: fluxoSubindo ? 'row' : 'row-reverse',
       maxWidth: tremVagao.width,
       justifyContent: fluxoSubindo ? 'flex-start' : 'flex-end',

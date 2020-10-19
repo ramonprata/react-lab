@@ -2,13 +2,13 @@ import React from 'react';
 import { TAMANHO_PONTO_ESTACAO } from '../utils';
 
 const EstacaoPatio = (props) => {
-  const { estacao, positionX, fluxoSubindo } = props;
+  const { estacao, posicaoX, fluxoSubindo } = props;
   const {
     estacaoContent,
     container,
     marcadorEstacao,
     estacaoContainer,
-  } = getStyles(estacao, positionX, fluxoSubindo);
+  } = getStyles(estacao, posicaoX, fluxoSubindo);
 
   return (
     <React.Fragment>
@@ -22,16 +22,17 @@ const EstacaoPatio = (props) => {
   );
 };
 
-const getStyles = (estacao, positionX, fluxoSubindo) => {
+const getStyles = (estacao, posicaoX, fluxoSubindo) => {
   return {
     container: {
       display: 'flex',
       position: 'absolute',
       backgroundColor: '#fff',
       height: 48,
-      left: positionX,
+      left: posicaoX,
       flexDirection: fluxoSubindo ? 'column-reverse' : 'column',
       justifyContent: 'space-around',
+      cursor: 'pointer',
     },
 
     marcadorEstacao: {
@@ -39,7 +40,7 @@ const getStyles = (estacao, positionX, fluxoSubindo) => {
       height: TAMANHO_PONTO_ESTACAO,
       borderRadius: 4,
       zIndex: 1,
-      left: positionX,
+      left: posicaoX,
       backgroundColor: estacao.marco ? '#000' : '#aaa',
     },
 

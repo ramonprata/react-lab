@@ -1,5 +1,5 @@
 import React from 'react';
-import { getPositionX, isFluxoSubindo } from '../utils';
+import { getPosicaoX, isFluxoSubindo } from '../utils';
 import EstacaoPatio from './EstacaoPatio';
 
 const Estacoes = (props) => {
@@ -7,12 +7,12 @@ const Estacoes = (props) => {
 
   return estacoesComPosicoes.map((estacao, idx) => {
     const fluxoSubindo = isFluxoSubindo(sentidoFluxo);
-    const positionX = getPositionX(idx, estacao.marco);
+    const posicaoX = getPosicaoX(idx, estacao.marco);
     return (
       <EstacaoPatio
         key={`estacao-${idx}`}
         estacao={estacao}
-        positionX={positionX}
+        posicaoX={posicaoX}
         fluxoSubindo={fluxoSubindo}
       />
     );

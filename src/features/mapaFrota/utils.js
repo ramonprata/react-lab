@@ -1,15 +1,17 @@
+import { mapas } from './mapas';
+
 export const STATUS_FROTA = { vazios: 'Vazios', carregados: 'Carregados' };
 export const FLUXOS_FROTA = { subindo: 'Subindo', descendo: 'Descendo' };
-
-export const MAX_HEIGHT_OBJ = 24;
+export const TIPOS_OBJETO_PLOTAR = {vagao: 'vagao', trem: 'trem'};
+export const MAX_HEIGHT_OBJ = 20;
 export const DISTANCIA_ENTRE_ESTACOES = 16;
 export const TREM_WIDTH = 56;
 export const VAGAO_ACOPLADO_WIDTH = 72;
-export const VAGAO_DESACOPLADO_WIDTH = 34;
+export const VAGAO_DESACOPLADO_WIDTH = 22;
 export const TAMANHO_PONTO_ESTACAO = 8;
 const DEFAULT_POSITION_Y = 140;
 
-export const getPositionX = (idx = 0) => {
+export const getPosicaoX = (idx = 0) => {
   return idx > 0 ? idx * DISTANCIA_ENTRE_ESTACOES : 0;
 };
 
@@ -25,7 +27,7 @@ export const objetoNasProximasEstacoes = (objeto, estacaoTrem) => {
 };
 
 export const calcPercentualPosicaObjeto = (idx, posicaoMarco) => {
-  const newPosition = posicaoMarco + (idx * 16 + 8);
+  const newPosition = posicaoMarco + (idx * 16 + TAMANHO_PONTO_ESTACAO);
   return newPosition;
 };
 
@@ -43,14 +45,14 @@ const buscaEstacaoObjetoEntreMarcos = (mapaEstacoes, objeto) => {
         objeto.LocalidadeAtual
       );
       if (indexEstacaoObjeto >= 0) {
-        const positionX = calcPercentualPosicaObjeto(
+        const posicaoX = calcPercentualPosicaObjeto(
           indexEstacaoObjeto,
-          estacao.positionX
+          estacao.posicaoX
         );
         return {
           ...objeto,
-          positionX,
-          positionY: DEFAULT_POSITION_Y, // TODO: deve ser diferente para trem e vagão solto
+          posicaoX,
+          posicaoY: DEFAULT_POSITION_Y,
         };
       }
     }
@@ -64,18 +66,24 @@ export const getObjetoNaEstacao = (objeto, mapaComPosicoes, tipo = 'trem') => {
     (estacao) => estacao.estacaoPatio === objeto.LocalidadeAtual
   );
   if (estacaoTrem) {
-    const positionX = TAMANHO_PONTO_ESTACAO / 2 + estacaoTrem.positionX;
+    const tamanhoObjeto =
+      tipo === 'trem' ? getTamanhoTrem(objeto) : VAGAO_DESACOPLADO_WIDTH;
+
+    const posicaoY = isTrem ? DEFAULT_POSITION_Y : DEFAULT_POSITION_Y * 0.6;
+    const posicaoX = TAMANHO_PONTO_ESTACAO / 2 + estacaoTrem.posicaoX;
+
     return {
       ...objeto,
-      positionX,
-      positionY: isTrem ? DEFAULT_POSITION_Y : DEFAULT_POSITION_Y * 0.6,
-      width: tipo === 'trem' ? getTamanhoTrem(objeto) : VAGAO_DESACOPLADO_WIDTH,
+      posicaoX,
+      posicaoY,
+      width: tamanhoObjeto,
       tipo,
     };
+    
   } else {
     const resultado = {
       ...buscaEstacaoObjetoEntreMarcos(mapaComPosicoes, objeto),
-      positionY: isTrem ? DEFAULT_POSITION_Y : DEFAULT_POSITION_Y / 2,
+      posicaoY: isTrem ? DEFAULT_POSITION_Y : DEFAULT_POSITION_Y / 2,
       width: tipo === 'trem' ? getTamanhoTrem(objeto) : VAGAO_DESACOPLADO_WIDTH,
       tipo,
     };
@@ -87,7 +95,7 @@ export const getEstacoesComPosicoes = (estacoesPatios) => {
   return estacoesPatios.map((estacao, idx) => {
     return {
       ...estacao,
-      positionX: getPositionX(idx),
+      posicaoX: getPosicaoX(idx),
     };
   });
 };
@@ -105,19 +113,19 @@ export const atualizaPosicaoYObjetos = (
   const anterioresAfetados = Math.ceil(estacoesObjetoOcupa / 2);
   let indexObjetoAtualizar = indexObjetoAtual - anterioresAfetados;
   const larguraObjetoAtual = objetoRenderizar.width;
-  const inicioObjetoAtual = objetoRenderizar.positionX - larguraObjetoAtual / 2;
+  const inicioObjetoAtual = objetoRenderizar.posicaoX - larguraObjetoAtual / 2;
 
   while (indexObjetoAtualizar < indexObjetoAtual) {
     const objetoCorrente = objetos[indexObjetoAtualizar];
     if (objetoCorrente) {
       const fimObjetoCorrente =
-        objetoCorrente.positionX + objetoCorrente.width / 2;
+        objetoCorrente.posicaoX + objetoCorrente.width / 2;
 
       if (inicioObjetoAtual <= fimObjetoCorrente) {
         const alturaMinima =
           indexObjetoAtual === 0 ? alturaMinimaPlotarObjetos : 0;
-        objetoRenderizar.positionY =
-          alturaMinima + objetoCorrente.positionY + MAX_HEIGHT_OBJ + 10;
+        objetoRenderizar.posicaoY =
+          alturaMinima + objetoCorrente.posicaoY + MAX_HEIGHT_OBJ + 10;
       }
     }
     indexObjetoAtualizar++;
@@ -136,22 +144,37 @@ export const isFluxoSubindo = (sentido) => {
   return sentido === FLUXOS_FROTA.subindo;
 };
 
-const ordenaObjetosPorKey = (objetosPlotar, key) => {
-  return objetosPlotar.sort((a, b) => {
-    if (a[key] > b[key]) {
-      return 1;
-    } else if (a[key] < b[key]) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
+export const ordenaObjetosPorKey = (objetosPlotar, key) => {
+  if (Boolean(objetosPlotar.length)) {
+    return objetosPlotar.sort((a, b) => {
+      if (a[key] > b[key]) {
+        return 1;
+      } else if (a[key] < b[key]) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+  return [];
 };
 
 export const ordenaObjetosPosicaoY = (objetosPlotar) => {
-  return ordenaObjetosPorKey(objetosPlotar, 'positionY');
+  return ordenaObjetosPorKey(objetosPlotar, 'posicaoY');
 };
 
 export const ordenaObjetosLocalidade = (objetosPlotar) => {
   return ordenaObjetosPorKey(objetosPlotar, 'LocalidadeAtual');
+};
+
+export const getEstacoes = (mapaSelecionado) => {
+  const mapa = mapas[mapaSelecionado];
+  let estacoesComProximos = [];
+  Object.values(mapa).forEach((estacao) => {
+    const proximosPontos = estacao.proximos
+      ? estacao.proximos.slice(0, Math.ceil(0.7 * estacao.proximos.length))
+      : [];
+    estacoesComProximos.push(estacao, ...proximosPontos);
+  });
+  return getEstacoesComPosicoes(estacoesComProximos);
 };
